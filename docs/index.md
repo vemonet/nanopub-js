@@ -1,6 +1,6 @@
 ---
 layout: page.11ty.cjs
-title: <nanopub-display> ⌲ Home
+title: nanopub-display
 ---
 
 # &lt;nanopub-display>
@@ -9,7 +9,7 @@ title: <nanopub-display> ⌲ Home
 
 ## As easy as HTML
 
-<section class="columns">
+<section>
   <div>
 
 `<nanopub-display>` is just an HTML element. You can it anywhere you can use HTML!
@@ -28,7 +28,7 @@ title: <nanopub-display> ⌲ Home
 
 ## Declarative rendering
 
-<section class="columns">
+<section>
   <div>
 
 `<nanopub-display>` can be used with declarative rendering libraries like Angular, React, Vue, and lit-html

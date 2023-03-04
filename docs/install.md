@@ -1,6 +1,6 @@
 ---
 layout: page.11ty.cjs
-title: <nanopub-display> ⌲ Install
+title: nanopub-display ⌲ Install
 ---
 
 # Install
