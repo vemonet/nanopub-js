@@ -100,26 +100,46 @@ export class NanopubWriter extends Writer {
   }
 
 
-  override addPrefixes(prefixes, done) {
+  override addPrefixes(prefixes: any, done: any) {
     // Ignore prefixes if not supported by the serialization
+    // Finish a possible pending quad
+    if (this._subject !== null) {
+      this._write(this._inDefaultGraph ? '.<br/>' : '<br/>}<br/>');
+      this._subject = null, this._graph = '';
+    }
+
     if (!this._prefixIRIs)
       return done && done();
     // Write all new prefixes
     let hasPrefixes = false;
+    // let i = 0;
+    // const enoughPrefixes = Object.keys(prefixes).length > 1
     for (let prefix in prefixes) {
+      // if (enoughPrefixes && i === 1) {
+      //   this._write('<div class="nanopub-prefixes">');
+      // }
       let iri = prefixes[prefix];
       if (typeof iri !== 'string')
         iri = iri.value;
       hasPrefixes = true;
       // Finish a possible pending quad
-      if (this._subject !== null) {
-        this._write(this._inDefaultGraph ? '.<br/>' : '<br/>}<br/>');
-        this._subject = null, this._graph = '';
-      }
+      // if (this._subject !== null) {
+      //   this._write(this._inDefaultGraph ? '.<br/>' : '<br/>}<br/>');
+      //   this._subject = null, this._graph = '';
+      // }
       // Store and write the prefix
       this._prefixIRIs[iri] = (prefix += ':');
-      this._write(`@prefix ${prefix} <<a href="${iri}" ${aTagAttrs}>${iri}</a>> .<br/>`);
+      // this._write(`@prefix ${prefix} <<a href="${iri}" ${aTagAttrs}>${iri}</a>> .`);
+
+      // if (enoughPrefixes && i === 0) {
+      //   this._write('<button @click="${this._expandPrefixes}" class="nanopub-prefixes-button">Show all prefixes</button>');
+      // }
+      // this._write(`<br/>`);
+      // i++
     }
+    // if (enoughPrefixes) {
+    //   this._write('</div>');
+    // }
     // Recreate the prefix matcher
     if (hasPrefixes) {
       let IRIlist = '', prefixList = '';
@@ -130,11 +150,9 @@ export class NanopubWriter extends Writer {
       IRIlist = escapeRegex(IRIlist);
       this._prefixRegex = new RegExp(`^(?:${prefixList})[^\/]*$|` +
                                      `^(${IRIlist})([_a-zA-Z][\\-_a-zA-Z0-9]*)*$`);
-      // this._prefixRegex = new RegExp(`^(?:${prefixList})[^\/]*$|` +
-      //                                `^(${IRIlist})([_a-zA-Z][\\-_a-zA-Z0-9]*)*$`);
     }
     // End a prefix block with a newline
-    this._write(hasPrefixes ? '' : '', done);
+    // this._write(hasPrefixes ? '' : '', done);
   }
 
 
@@ -163,7 +181,7 @@ function escapeRegex(regex: any) {
 }
 
 
-function characterReplacer(character) {
+function characterReplacer(character: any) {
   // Replace a single character by its escaped version
   let result = escapedCharacters[character];
   if (result === undefined) {
