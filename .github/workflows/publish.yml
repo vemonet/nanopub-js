@@ -1,0 +1,30 @@
+name: Release NPM Package
+
+on:
+  workflow_dispatch:
+  # schedule:
+  #   - cron: '0 7 * * 0-4'
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  build_linux:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+        # token: ${{ secrets.GH_TOKEN }}
+
+    - name: Install package dependencies
+      run: yarn
+
+    - name: Build
+      run: yarn build
+
+    - name: Publish NPM packages
+      env:
+        NPM_SECRET_TOKEN: ${{ secrets.NPM_TOKEN }}
+      run: yarn publish -n $NPM_SECRET_TOKEN

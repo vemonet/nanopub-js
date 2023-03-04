@@ -1,0 +1,96 @@
+{
+  "name": "nanopub-display",
+  "private": true,
+  "version": "0.0.1",
+  "description": "A web component to display Nanopublications",
+  "author": "Vincent Emonet",
+  "license": "MIT",
+  "type": "module",
+  "main": "dist/nanopub-display.js",
+  "module": "dist/nanopub-display.js",
+  "types": "dist/nanopub-display.d.ts",
+  "unpkg": "dist/nanopub-display.min.js",
+  "customElements": "dist/custom-elements.json",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/nanopub-display.d.ts",
+      "default": "./dist/nanopub-display.js"
+    },
+    "./custom-elements.json": "./dist/custom-elements.json",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "yarn clean && tsc && rollup -c && rollup -c rollup.min.config.js",
+    "build:watch": "tsc --watch",
+    "build:vite": "vite build",
+    "docs": "yarn docs:build && yarn docs:serve",
+    "docs:build": "yarn docs:clean && tsc --outDir docs-dist && yarn analyze && rollup -c --file docs-dist/nanopub-display.min.js && yarn docs:assets && yarn docs:gen",
+    "docs:serve": "vite docs-dist",
+    "docs:gen": "eleventy --config=.eleventy.cjs",
+    "docs:gen:watch": "eleventy --config=.eleventy.cjs --watch",
+    "docs:assets": "cp node_modules/prismjs/themes/prism-okaidia.css docs-dist/",
+    "docs:clean": "rimraf docs-dist",
+    "analyze": "cem analyze --litelement --globs \"src/**/*.ts\" --outdir dist",
+    "test": "yarn test:build && wtr",
+    "test:build": "tsc && BUNDLE=true rollup -c",
+    "test:watch": "yarn test:build && wtr --watch",
+    "test:all": "yarn test:dev && yarn test:prod",
+    "test:prod": "yarn test && MODE=prod wtr",
+    "clean": "rimraf dist",
+    "format": "prettier \"**/*.{cjs,html,js,json,md,ts}\" --ignore-path ./.eslintignore --write",
+    "lint": "yarn lint:lit-analyzer && yarn lint:eslint",
+    "lint:eslint": "eslint 'src/**/*.ts'",
+    "lint:lit-analyzer": "lit-analyzer"
+  },
+  "keywords": [
+    "nanopublications",
+    "web-components",
+    "lit-element",
+    "typescript",
+    "lit"
+  ],
+  "dependencies": {
+    "lit": "^2.2.4",
+    "n3": "^1.16.3"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^1.0.1",
+    "@11ty/eleventy-plugin-syntaxhighlight": "^4.0.0",
+    "@custom-elements-manifest/analyzer": "^0.6.3",
+    "@open-wc/testing": "^3.1.5",
+    "@rollup/plugin-commonjs": "^24.0.1",
+    "@rollup/plugin-node-resolve": "^15.0.1",
+    "@rollup/plugin-replace": "^5.0.2",
+    "@rollup/plugin-typescript": "^11.0.0",
+    "@types/n3": "^1.10.4",
+    "@typescript-eslint/eslint-plugin": "^5.25.0",
+    "@typescript-eslint/parser": "^5.25.0",
+    "@web/dev-server": "^0.1.31",
+    "@web/dev-server-esbuild": "^0.3.3",
+    "@web/dev-server-legacy": "^1.0.0",
+    "@web/test-runner": "^0.15.0",
+    "@web/test-runner-playwright": "^0.9.0",
+    "@webcomponents/webcomponentsjs": "^2.6.0",
+    "eslint": "^8.15.0",
+    "lit-analyzer": "^1.2.1",
+    "prettier": "^2.6.2",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.73.0",
+    "rollup-plugin-minify-html-literals": "^1.2.6",
+    "rollup-plugin-summary": "^1.4.3",
+    "rollup-plugin-terser": "^7.0.2",
+    "typescript": "^4.9.5",
+    "vite": "^4.1.4"
+  },
+  "prettier": {
+    "trailingComma": "es5",
+    "tabWidth": 2,
+    "singleQuote": true,
+    "bracketSpacing": false,
+    "arrowParens": "always"
+  }
+}
