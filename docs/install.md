@@ -19,7 +19,7 @@ npm i --save nanopub-display
 yarn add nanopub-display
 ```
 
-## 🌐 Import from CDN
+## 🌐 Import from a CDN
 
 npm CDNs like [unpkg.com](https://unpkg.com) or [jsdelivr.com](https://www.jsdelivr.com) can directly serve files that have been published to npm. This works great for standard JavaScript modules that the browser can load natively, or minified bundles.
 

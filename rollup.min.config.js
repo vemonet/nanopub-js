@@ -8,18 +8,18 @@ export default {
   external: [],
   output: [
     {
-        file: "dist/nanopub-display.min.js",
-        // NOTE: apparently esm is not supported by firefox web workers
-        // format: "esm",
-        format: 'iife',
-        name: '[name].min.js',
-        plugins: [
-          terser({
-            ecma: 2020,
-            module: true,
-            warnings: true,
-          }),
-        ],
+      file: 'dist/nanopub-display.min.js',
+      // NOTE: apparently esm is not supported by firefox web workers
+      // format: "esm",
+      format: 'iife',
+      name: '[name].min.js',
+      plugins: [
+        terser({
+          ecma: 2020,
+          module: true,
+          warnings: true,
+        }),
+      ],
     },
   ],
   plugins: [

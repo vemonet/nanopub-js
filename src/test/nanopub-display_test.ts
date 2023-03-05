@@ -10,14 +10,21 @@ suite('nanopub-display', () => {
   });
 
   test('render and check loading with a nanopub URL', async () => {
-    const el = await fixture(html`<nanopub-display url="https://purl.org/np/RAHtkscyyyJDLvWRuINckQrn5rbHzQKvwakNVC3fmRzGU"></nanopub-display>`);
-    console.log(assert.shadowDom)
+    const el = await fixture(
+      html`<nanopub-display
+        url="https://purl.org/np/RAHtkscyyyJDLvWRuINckQrn5rbHzQKvwakNVC3fmRzGU"
+      />`
+    );
+    console.log(assert.shadowDom);
     assert.shadowDom.equal(
       el,
       `
-      <div class="nanopub">
+      <div
+        class="nanopub"
+        style="background-color:inherit;"
+      >
+        Loading...
       </div>
-      Loading...
     `
     );
   });
@@ -39,5 +46,4 @@ suite('nanopub-display', () => {
   //   await el.updateComplete;
   //   assert.equal(getComputedStyle(el).width, '100%');
   // });
-
 });

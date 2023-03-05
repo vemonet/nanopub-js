@@ -1,8 +1,8 @@
 # 🧬 Web Component to display Nanopublications
 
-A standard Web Component to display [Nanopublications](https://nanopub.net). 
+A standard Web Component to display [Nanopublications](https://nanopub.net).
 
-This document contains details on the development workflow used for the component. 
+This document contains details on the development workflow used for the component.
 
 Refer to the documentation website for more details on how to use the component: **[vemonet.github.io/nanopub-display](https://vemonet.github.io/nanopub-display)**
 

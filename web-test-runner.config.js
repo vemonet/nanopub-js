@@ -1,6 +1,6 @@
 import {legacyPlugin} from '@web/dev-server-legacy';
 import {playwrightLauncher} from '@web/test-runner-playwright';
-import { esbuildPlugin } from '@web/dev-server-esbuild';
+import {esbuildPlugin} from '@web/dev-server-esbuild';
 
 const mode = process.env.MODE || 'dev';
 if (!['dev', 'prod'].includes(mode)) {
@@ -102,7 +102,7 @@ export default {
     },
   },
   plugins: [
-    esbuildPlugin({ ts: true, target: 'es2020', sourceMap: true }),
+    esbuildPlugin({ts: true, target: 'es2020', sourceMap: true}),
     // Detect browsers without modules (e.g. IE11) and transform to SystemJS
     // (https://modern-web.dev/docs/dev-server/plugins/legacy/).
     // legacyPlugin({

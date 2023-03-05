@@ -10,8 +10,8 @@ export default {
   input: 'dist/nanopub-display.js',
   output: [
     {
-        file: "dist/nanopub-display.js",
-        format: "esm",
+      file: 'dist/nanopub-display.js',
+      format: 'esm',
     },
   ],
   // No external for testing, evything needs to be bundled
@@ -25,7 +25,7 @@ export default {
       // include: 'node_modules/**',
     }),
     // Resolve bare module specifiers to relative paths
-    resolve({ preferBuiltins: true, browser: true }),
+    resolve({preferBuiltins: true, browser: true}),
     // Minify HTML template literals
     // minifyHTML(),
     summary(),
