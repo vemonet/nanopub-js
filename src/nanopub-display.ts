@@ -117,66 +117,66 @@ export class NanopubDisplay extends LitElement {
    * The URL of the nanopublication to display
    */
   @property({type: String})
-  url: string = '';
+  url = '';
   /**
    * The RDF string of the nanopublication to display. Will be downloaded from URL if not provided.
    */
   @property({type: String})
-  rdf: string = '';
+  rdf = '';
 
   /**
    * Display the prefixes section, or not
    */
   @property({type: Boolean})
-  displayPrefixes: boolean = false;
+  displayPrefixes = false;
   /**
    * Display the Head graph section, or not
    */
   @property({type: Boolean})
-  displayHead: boolean = false;
+  displayHead = false;
   /**
    * Display the PubInfo graph section, or not
    */
   @property({type: Boolean})
-  displayPubinfo: boolean = true;
+  displayPubinfo = true;
   /**
    * Display the Provenance graph section, or not
    */
   @property({type: Boolean})
-  displayProvenance: boolean = true;
+  displayProvenance = true;
   /**
    * Display the Assertion graph section, or not
    */
   @property({type: Boolean})
-  displayAssertion: boolean = true;
+  displayAssertion = true;
 
   /**
    * Hide the PubInfo graph by default
    */
   @property({type: Boolean})
-  hidePubinfo: boolean = false;
+  hidePubinfo = false;
   /**
    * Hide the Provenance graph by default
    */
   @property({type: Boolean})
-  hideProvenance: boolean = false;
+  hideProvenance = false;
   /**
    * Hide the Assertion graph by default
    */
   @property({type: Boolean})
-  hideAssertion: boolean = false;
+  hideAssertion = false;
 
   /**
    * Disable the button to change which sections of the nanopub are displayed
    */
   @property({type: Boolean})
-  disableDisplayButton: boolean = false;
+  disableDisplayButton = false;
 
   /**
    * Boolean to know if the window to change which sections of the nanopub are displayed is opened
    */
   @state()
-  showDisplayOptions: boolean = false;
+  showDisplayOptions = false;
   /**
    * The HTML generated from the RDF to display the nanopub
    */

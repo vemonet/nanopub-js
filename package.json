@@ -38,9 +38,7 @@
     "test:prod": "yarn test && MODE=prod wtr",
     "test:all": "yarn test:dev && yarn test:prod",
     "format": "prettier \"**/*.{cjs,html,js,json,md,ts}\" --ignore-path ./.eslintignore --write",
-    "lint": "yarn lint:lit-analyzer && yarn lint:eslint",
-    "lint:eslint": "eslint 'src/**/*.ts'",
-    "lint:lit-analyzer": "lit-analyzer"
+    "lint": "lit-analyzer && eslint 'src/**/*.ts' --fix"
   },
   "keywords": [
     "nanopublications",
