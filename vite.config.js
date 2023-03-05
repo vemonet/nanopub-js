@@ -7,28 +7,6 @@ import commonjs from '@rollup/plugin-commonjs';
 
 // NOTE: vite build not used, we use rollup directly
 
-const rollupPlugins = [
-    typescript({
-        compilerOptions: {
-            target: 'esnext',
-            declaration: true,
-            module: 'CommonJS',
-            // declarationDir: "types/",
-        },
-    }),
-    // TODO: resolves imports, but fail due to N3.js https://github.com/rdfjs/N3.js/issues/257
-    // nodeGlobals(),
-    commonjs({
-        extensions: ['.js', '.ts'],
-        include: [/n3/],
-    }),
-    nodeResolve(),
-    // filesize({
-    //     showMinifiedSize: false,
-    //     showBrotliSize: true,
-    // }),
-];
-
 // https://vitejs.dev/config/
 export default defineConfig({
     build: {
@@ -66,24 +44,7 @@ export default defineConfig({
                 },
             ],
             rollupPlugins,
-            // external: /^@microsoft\/fast-(element|components)/
-            // external: /^@microsoft\/fast-element/,
-            // Added from rollup.config.js
-            // input: "src/index.ts",
-            // output: [
-            //     {
-            //         // file: "dist/nanopub-display.js",
-            //         dir: "dist",
-            //         format: "esm",
-            //     },
-            //     {
-            //         // file: "dist/nanopub-display.min.js",
-            //         dir: "dist",
-            //         format: "esm",
-            //         plugins: [terser()],
-            //     },
-            // ],
-            // plugins,
+            // external: [/lit/, /n3/]
         },
     },
     optimizeDeps: {
@@ -91,11 +52,27 @@ export default defineConfig({
     },
     // plugins: [
     //     // dts(),
-    //     // terser(),
-    //     // input https://www.npmjs.com/package/html-minifier-terser options
     //     // ViteMinifyPlugin({}),
     // ],
     // define: {
     //     global: {},
     // },
 });
+
+
+const rollupPlugins = [
+    typescript({
+        compilerOptions: {
+            target: 'esnext',
+            declaration: true,
+            module: 'CommonJS',
+            // declarationDir: "types/",
+        },
+    }),
+    // nodeGlobals(),
+    commonjs({
+        extensions: ['.js', '.ts'],
+        // include: [/n3/],
+    }),
+    nodeResolve(),
+];

@@ -9,7 +9,13 @@ env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
-  build_linux:
+
+  tests:
+    uses: vemonet/rdflib-endpoint/.github/workflows/test.yml@main
+    secrets: inherit
+
+  publish:
+    needs: tests
     runs-on: ubuntu-latest
 
     steps:

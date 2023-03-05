@@ -6,7 +6,7 @@ module.exports = class Docs {
   data() {
     return {
       layout: 'page.11ty.cjs',
-      title: '<nanopub-display> ⌲ Docs',
+      title: 'nanopub-display ⌲ Docs',
     };
   }
 
@@ -20,7 +20,7 @@ module.exports = class Docs {
       []
     );
     return `
-     <h1>API</h1>
+     <h1>🔌 API</h1>
      ${elements
        .map(
          (element) => `

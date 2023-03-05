@@ -1,8 +1,12 @@
 # 🧬 Web Component to display Nanopublications
 
-A standard Web Component to display [Nanopublications](https://nanopub.net).
+A standard Web Component to display [Nanopublications](https://nanopub.net). 
 
-## Setup
+This document contains details on the development workflow used for the component. 
+
+Refer to the documentation website for more details on how to use the component: **[vemonet.github.io/nanopub-display](https://vemonet.github.io/nanopub-display)**
+
+## 📥️ Setup
 
 Install dependencies:
 
@@ -10,7 +14,7 @@ Install dependencies:
 yarn
 ```
 
-## Development
+## 🧑‍💻 Development
 
 Start the component in development:
 
@@ -18,7 +22,7 @@ Start the component in development:
 yarn dev
 ```
 
-## Build
+## 📦️ Build
 
 This sample uses the TypeScript compiler to produce JavaScript that runs in modern browsers.
 
@@ -34,7 +38,7 @@ To watch files and rebuild when the files are modified, run the following comman
 yarn build:watch
 ```
 
-## Testing
+## ✅ Testing
 
 This sample uses modern-web.dev's [@web/test-runner](https://www.npmjs.com/package/@web/test-runner) for testing. See the [modern-web.dev testing documentation](https://modern-web.dev/docs/test-runner/overview) for more information.
 
@@ -54,7 +58,13 @@ Alternatively the `test:prod` and `test:prod:watch` commands will run your tests
 
 > If you use VS Code, we highly recommend the [lit-plugin extension](https://marketplace.visualstudio.com/items?itemName=runem.lit-plugin), which enables some extremely useful features for lit-html templates.
 
-## Linting
+## ✒️ Formatting
+
+[Prettier](https://prettier.io/) is used for code formatting. It has been pre-configured according to the Lit's style. You can change this in the `package.json`.
+
+Prettier has not been configured to run when committing files, but this can be added with Husky and `pretty-quick`. See the [prettier.io](https://prettier.io/) site for instructions.
+
+## ☑️ Linting
 
 Linting of TypeScript files is provided by [ESLint](eslint.org) and [TypeScript ESLint](https://github.com/typescript-eslint/typescript-eslint). In addition, [lit-analyzer](https://www.npmjs.com/package/lit-analyzer) is used to type-check and lint lit-html templates with the same engine and rules as lit-plugin.
 
@@ -66,13 +76,7 @@ To lint the project run:
 yarn lint
 ```
 
-## Formatting
-
-[Prettier](https://prettier.io/) is used for code formatting. It has been pre-configured according to the Lit's style. You can change this in `.prettierrc.json`.
-
-Prettier has not been configured to run when committing files, but this can be added with Husky and `pretty-quick`. See the [prettier.io](https://prettier.io/) site for instructions.
-
-## Static Site
+## 📖 Documentation website
 
 This project includes a simple website generated with the [eleventy](11ty.dev) static site generator and the templates and pages in `/docs`. The site is generated to `/docs-dist` and intended to be checked in so that GitHub pages can serve the site [from `/docs` on the master branch](https://help.github.com/en/github/working-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
 
@@ -98,6 +102,6 @@ yarn docs:watch
 
 The site will usually be served at http://localhost:8000.
 
-## More information
+## ℹ️ More information
 
 Vite TS starter: https://github.com/vitejs/vite/tree/main/packages/create-vite/template-lit-ts

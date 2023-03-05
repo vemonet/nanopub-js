@@ -3,11 +3,13 @@ layout: page.11ty.cjs
 title: nanopub-display
 ---
 
-# &lt;nanopub-display>
+<br/>
 
 `<nanopub-display>` is a standard web component to easily display [Nanopublications](https://nanopub.net) anywhere you can use HTML.
 
-## As easy as HTML
+It enables developers and users to control which graphs from the nanopublication are displayed.
+
+## 🏷️ As easy as HTML
 
 <section>
   <div>
@@ -15,18 +17,30 @@ title: nanopub-display
 `<nanopub-display>` is just an HTML element. You can it anywhere you can use HTML!
 
 ```html
-<nanopub-display url="https://purl.org/np/RAHtkscyyyJDLvWRuINckQrn5rbHzQKvwakNVC3fmRzGU.trig"></nanopub-display>
+<html lang="en">
+  <head>
+    <script type="module" src="https://unpkg.com/nanopub-display?module"></script>
+  </head>
+
+  <body>
+    <div style="min-height: 100vh; width: 100%;">
+      <nanopub-display
+        url="https://purl.org/np/RAHtkscyyyJDLvWRuINckQrn5rbHzQKvwakNVC3fmRzGU"
+      />
+    </div>
+  </body>
+</html>
 ```
 
   </div>
   <div>
 
-<nanopub-display style="max-height: 400px; overflow: scroll;" url="https://purl.org/np/RAHtkscyyyJDLvWRuINckQrn5rbHzQKvwakNVC3fmRzGU.trig"></nanopub-display>
+<nanopub-display url="https://purl.org/np/RAHtkscyyyJDLvWRuINckQrn5rbHzQKvwakNVC3fmRzGU"></nanopub-display>
 
   </div>
 </section>
 
-## Declarative rendering
+## 💫 Declarative rendering
 
 <section>
   <div>
@@ -36,12 +50,12 @@ title: nanopub-display
 ```js
 import {html, render} from 'lit-html';
 
-const np = 'https://purl.org/np/RAHtkscyyyJDLvWRuINckQrn5rbHzQKvwakNVC3fmRzGU.trig';
+const np = 'https://purl.org/np/RAHtkscyyyJDLvWRuINckQrn5rbHzQKvwakNVC3fmRzGU';
 
 render(
   html`
     <h2>This is a &lt;nanopub-display&gt;</h2>
-    <nanopub-display url=${np}></nanopub-display>
+    <nanopub-display url=${np} />
   `,
   document.body
 );
@@ -51,7 +65,7 @@ render(
   <div>
 
 <h2>This is a &lt;nanopub-display&gt;</h2>
-<nanopub-display url="https://purl.org/np/RAHtkscyyyJDLvWRuINckQrn5rbHzQKvwakNVC3fmRzGU.trig"></nanopub-display>
+<nanopub-display url="https://purl.org/np/RAHtkscyyyJDLvWRuINckQrn5rbHzQKvwakNVC3fmRzGU"></nanopub-display>
 
   </div>
 </section>

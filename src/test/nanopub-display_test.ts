@@ -15,7 +15,7 @@ suite('nanopub-display', () => {
     assert.shadowDom.equal(
       el,
       `
-      <div>
+      <div class="nanopub">
       </div>
       Loading...
     `

@@ -74,7 +74,7 @@ export class NanopubWriter extends Writer {
 
         // Close the previous graph and start the new one
         this._write((this._subject === null ? '' : (this._inDefaultGraph ? '.<br/>' : ' .<br/>}</div>')) +
-                    (DEFAULTGRAPH.equals(graph) ? '' : `<div class="nanopub-${graphLabel}">${this._encodeIriOrBlank(graph)} {<br/>`));
+                    (DEFAULTGRAPH.equals(graph) ? '' : `<div class="nanopub-graph" id="nanopub-${graphLabel}">${this._encodeIriOrBlank(graph)} {<br/>`));
         this._graph = graph;
         this._subject = null;
       }

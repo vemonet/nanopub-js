@@ -3,34 +3,54 @@ layout: page.11ty.cjs
 title: nanopub-display ⌲ Install
 ---
 
-# Install
+# 📥️ Install
 
-`<nanopub-display>` is distributed on npm, so you can install it locally or use it via npm CDNs like unpkg.com.
+`<nanopub-display>` is distributed on npm, so you can install it in your project, or use it via npm CDNs like [unpkg.com](https://unpkg.com).
 
-## Local Installation
+## 📦️ Install with package managers
+
+The most convenient way to install a package in your project, using either `npm` or `yarn`:
 
 ```bash
-npm i nanopub-display
+npm i --save nanopub-display
 ```
 
 ```bash
-yarn nanopub-display
+yarn add nanopub-display
 ```
 
-## CDN
+## 🌐 Import from CDN
 
-npm CDNs like [unpkg.com]() can directly serve files that have been published to npm. This works great for standard JavaScript modules that the browser can load natively.
+npm CDNs like [unpkg.com](https://unpkg.com) or [jsdelivr.com](https://www.jsdelivr.com) can directly serve files that have been published to npm. This works great for standard JavaScript modules that the browser can load natively.
 
 For this element to work from unpkg.com specifically, you need to include the `?module` query parameter, which tells unpkg.com to rewrite "bare" module specifiers to full URLs.
 
-### HTML
+### 🛩️ Import Module
+
+In HTML:
 
 ```html
 <script type="module" src="https://unpkg.com/nanopub-display?module"></script>
 ```
 
-### JavaScript
+In JavaScript:
+
+```js
+import { NanopubDisplay } from 'https://unpkg.com/nanopub-display?module';
+```
+
+### 🚛 Import Bundle
+
+We also distribute Nanopub Display as a minified bundle with all dependencies pre-included (~60kB).
+
+Import the latest version:
 
 ```html
-import {MyElement} from 'https://unpkg.com/nanopub-display?module';
+<script type="module" src="https://cdn.jsdelivr.net/npm/nanopub-display/dist/nanopub-display.min.js"></script>
+```
+
+In production we recommend to use a specific version:
+
+```html
+<script type="module" src="https://cdn.jsdelivr.net/npm/nanopub-display@0.0.1/dist/nanopub-display.min.js"></script>
 ```
