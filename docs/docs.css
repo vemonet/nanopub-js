@@ -4,6 +4,10 @@
 
 a { color: #1565c0; text-decoration: none; }
 a:hover { color: #cc9900; }
+/* Convert color hex to svg filter: https://codepen.io/sosuke/pen/Pjoqqp */
+a:hover .svgColor {
+  filter: invert(49%) sepia(95%) saturate(462%) hue-rotate(8deg) brightness(100%) contrast(101%);
+}
 
 body {
   margin: 0;
@@ -33,7 +37,7 @@ header {
   align-items: center;
   justify-content: center;
   /* height: 360px; */
-  padding-top: 20px;
+  padding-top: 10px;
   padding-bottom: 30px;
   margin: 0;
   background: linear-gradient(0deg, rgba(9,9,121,1) 0%, rgba(0,212,255,1) 100%);
@@ -92,7 +96,7 @@ nav > a {
   display: block;
   flex: 1;
   font-size: 18px;
-  padding: 20px 0;
+  padding: 8px 0;
   text-align: center;
   text-decoration: none;
 }

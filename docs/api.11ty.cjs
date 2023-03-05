@@ -11,7 +11,7 @@ module.exports = class Docs {
   }
 
   render(data) {
-    const manifest = data.api['11tydata'].customElements;
+    const manifest = data['api.11tydata'].customElements;
     const elements = manifest.modules.reduce(
       (els, module) =>
         els.concat(

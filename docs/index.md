@@ -14,7 +14,7 @@ It enables developers and users to control which graphs from the nanopublication
 <section>
   <div>
 
-`<nanopub-display>` is just an HTML element. You can it anywhere you can use HTML!
+`<nanopub-display>` is just an HTML element, you can use it anywhere you can use HTML:
 
 ```html
 <html lang="en">
@@ -54,7 +54,7 @@ const np = 'https://purl.org/np/RAHtkscyyyJDLvWRuINckQrn5rbHzQKvwakNVC3fmRzGU';
 
 render(
   html`
-    <h2>This is a &lt;nanopub-display&gt;</h2>
+    <h4>This is a &lt;nanopub-display&gt;</h4>
     <nanopub-display url=${np} />
   `,
   document.body
@@ -64,7 +64,7 @@ render(
   </div>
   <div>
 
-<h2>This is a &lt;nanopub-display&gt;</h2>
+<h4>This is a &lt;nanopub-display&gt;</h4>
 <nanopub-display url="https://purl.org/np/RAHtkscyyyJDLvWRuINckQrn5rbHzQKvwakNVC3fmRzGU"></nanopub-display>
 
   </div>

@@ -7,7 +7,7 @@ title: nanopub-display ⌲ Install
 
 `<nanopub-display>` is distributed on npm, so you can install it in your project, or use it via npm CDNs like [unpkg.com](https://unpkg.com).
 
-## 📦️ Install with package managers
+## 📦️ Install with a package manager
 
 The most convenient way to install a package in your project, using either `npm` or `yarn`:
 
@@ -21,7 +21,7 @@ yarn add nanopub-display
 
 ## 🌐 Import from CDN
 
-npm CDNs like [unpkg.com](https://unpkg.com) or [jsdelivr.com](https://www.jsdelivr.com) can directly serve files that have been published to npm. This works great for standard JavaScript modules that the browser can load natively.
+npm CDNs like [unpkg.com](https://unpkg.com) or [jsdelivr.com](https://www.jsdelivr.com) can directly serve files that have been published to npm. This works great for standard JavaScript modules that the browser can load natively, or minified bundles.
 
 For this element to work from unpkg.com specifically, you need to include the `?module` query parameter, which tells unpkg.com to rewrite "bare" module specifiers to full URLs.
 

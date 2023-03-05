@@ -1,20 +1,20 @@
-import {LitElement, html, css,} from 'lit';
+import {LitElement, html, css} from 'lit';
 import {customElement, property, state} from 'lit/decorators.js';
 import {when} from 'lit/directives/when.js';
 import {unsafeHTML} from 'lit-html/directives/unsafe-html.js';
+import { styleMap } from 'lit/directives/style-map.js';
 
-import { Parser, Quad } from 'n3';
-import { NanopubWriter } from './n3-writer'
+import {Parser, Quad} from 'n3';
+import {NanopubWriter} from './n3-writer'
 
-// Use ref and async loading: https://lit.dev/docs/templates/directives/#ref
-// Handle click outside display options: https://stackoverflow.com/questions/66567294/implementing-outside-clicks-on-lit-elements
 
 const npColor = {
   head: css`#e8e8e8`,
-  headDark: css`#d1d1d1`,
   assertion: css`#99ccff`,
   provenance: css`#f3a08c`,
   pubinfo: css`#ffff66`,
+  error: css`#f88b80`,
+  grey: css`#d1d1d1`,
 }
 
 /**
@@ -34,25 +34,6 @@ export class NanopubDisplay extends LitElement {
       word-break: break-all;
       margin-bottom: 8px;
     }
-    .nanopub-collapse-button {
-      float: right;
-      font-size: 9pt;
-      background: ${npColor.head};
-      padding: 5px;
-      margin-left: 8px;
-      border-radius: 7px;
-      border: none;
-      cursor: pointer;
-      text-decoration: none;
-      -webkit-appearance: none;
-      -moz-appearance: none;
-    }
-    .nanopub-collapse-button:hover {
-      background: ${npColor.headDark};
-    }
-    #nanopub-collapse-pubinfo:hover {
-      background: ${npColor.pubinfo};
-    }
     a { color: #000; text-decoration: none; }
     a:hover { color: #666; }
     .nanopub { height: 100%; padding: 8px; border-radius: 8px; border: solid; border-width: 1px; }
@@ -62,7 +43,6 @@ export class NanopubDisplay extends LitElement {
     #nanopub-assertion { background: ${npColor.assertion}; }
     #nanopub-provenance { background: ${npColor.provenance}; }
     #nanopub-pubinfo { background: ${npColor.pubinfo}; }
-
     .display-checklist {
       font-family: sans-serif;
       float: right;
@@ -70,21 +50,20 @@ export class NanopubDisplay extends LitElement {
       background: ${npColor.head};
       border-radius: 7px;
       text-align: center;
-      cursor: s-resize;
-      /* cursor: copy; */
     }
     .display-checklist .anchor-display-checklist {
       position: relative;
-      text-decoration: none;
       display: inline-block;
+      text-decoration: none;
       padding: 3px 8px;
       border-radius: 7px;
+      cursor: help;
+    }
+    .display-checklist .anchor-display-checklist:hover {
+      background: ${npColor.grey};
     }
     .display-checklist-wrapper {
-      z-index: 1;
-      position: absolute;
-      margin-top: 1px;
-      cursor: default;
+      z-index: 1; position: absolute; margin-top: 1px;
     }
     .display-checklist ul.items {
       position: relative;
@@ -98,13 +77,14 @@ export class NanopubDisplay extends LitElement {
       background: #fff;
     }
     .display-checklist ul.items li {
-      cursor: pointer;
-      list-style: none;
-      margin-right: 8px;
+      list-style: none; margin-right: 8px;
     }
-    .display-checklist label {
+    .display-checklist  label, li, input[type="checkbox"] {
       cursor: pointer;
     }
+    /* .error-message {
+      background: ${npColor.provenance};
+    } */
   `;
 
   /**
@@ -112,7 +92,6 @@ export class NanopubDisplay extends LitElement {
    */
   @property({type: String})
   url: string = '';
-
   /**
    * The RDF string of the nanopublication to display. Will be downloaded from URL if not provided.
    */
@@ -162,75 +141,108 @@ export class NanopubDisplay extends LitElement {
   hideAssertion: boolean = false;
 
   /**
-   * Enable or not the button to change the nanopub display
+   * Disable the button to change which sections of the nanopub are displayed
    */
   @property({type: Boolean})
   disableDisplayButton: boolean = false;
 
+  /**
+   * Boolean to know if the window to change which sections of the nanopub are displayed is opened
+   */
   @state()
   showDisplayOptions: boolean = false;
+  /**
+   * The HTML generated from the RDF to display the nanopub
+   */
   @state()
   html_rdf?: any;
+  /**
+   * A dictionary with the prefixes and namespaces used in the nanopub
+   */
   @state()
   prefixes?: any;
 
+  /**
+   * Error message to show if there is a problem displaying the nanopub
+   */
+  @state()
+  error?: string;
 
+  /**
+   * Fetch the Nanopub if needed, parse the RDF TRiG using n3.js,
+   * and generate the HTML to represent the nanopub
+   */
   override async connectedCallback() {
     super.connectedCallback();
 
-    if (this.url && !this.rdf) {
+    if (!this.url && !this.rdf) {
+      this.error = `⚠️ No nanopublication has been provided, use the "url" or "rdf"
+        attribute to provide the URL, or RDF in the TRiG format, of the nanopublication.`
+    }
+
+    if (!this.error && this.url && !this.rdf) {
       if (this.url.startsWith("https://purl.org/np/") && !this.url.endsWith(".trig")) {
         this.url = this.url + ".trig"
       }
-      const response = await fetch(this.url);
-      this.rdf = await response.text();
+      try {
+        const response = await fetch(this.url);
+        this.rdf = await response.text();
+      } catch (error) {
+        this.error = `⚠️ Issue fetching the nanopublication RDF at ${this.url}. ${error}`
+      }
     }
 
-    const parser = new Parser({ format: 'application/trig' })
-    const writer = new NanopubWriter(null, { format: 'application/trig' });
-    const quadList: Quad[] = []
-
-    parser.parse(
-      this.rdf,
-      (error: any, quad: Quad, prefixes: any): any => {
-          if (error) {
-          console.log("Error parsing the RDF with n3:", error)
+    // Parse the RDF with n3.js
+    if (!this.error && this.rdf) {
+      const parser = new Parser()
+      const writer = new NanopubWriter(null, { format: 'application/trig' });
+      const quadList: Quad[] = []
+      parser.parse(
+        this.rdf,
+        (error: any, quad: Quad, prefixes: any): any => {
+            if (error) {
+              this.error = `⚠️ Issue parsing the nanopublication RDF with n3.js, make sure it is in the TRiG format. ${error}`
               return null
-          }
-          if (quad) {
-            quadList.push(quad)
-          } else {
-            this.prefixes = {
-              this: prefixes["this"],
-              sub: prefixes["sub"],
-              ...prefixes
             }
-            writer.addPrefixes(this.prefixes, null)
-            // Add the quads to the writer after the prefixes
-            quadList.map((addQuad: Quad) => {
-              writer.addQuad(addQuad)
-            })
-            writer.end((_error: any, result: string) => {
-              this.html_rdf = unsafeHTML(result)
-              // this.html_rdf = html`${result}`
-              setTimeout(() => {
-                // Timeout 0 makes sure the div are loaded before updating the displayed sections
-                this.updateDisplay("displayPrefixes")
-                this.updateDisplay("displayHead")
-                if (this.hidePubinfo) this.displayPubinfo = false
-                this.updateDisplay("displayPubinfo")
-                if (this.hideProvenance) this.displayProvenance = false
-                this.updateDisplay("displayProvenance")
-                if (this.hideAssertion) this.displayAssertion = false
-                this.updateDisplay("displayAssertion")
-              }, 0)
-            });
+            if (quad) {
+              quadList.push(quad)
+            } else {
+              this.prefixes = {
+                this: prefixes["this"],
+                sub: prefixes["sub"],
+                ...prefixes
+              }
+              writer.addPrefixes(this.prefixes, null)
+              // Add the quads to the writer after the prefixes
+              quadList.map((addQuad: Quad) => {
+                writer.addQuad(addQuad)
+              })
+              writer.end((_error: any, result: string) => {
+                this.html_rdf = unsafeHTML(result)
+                // this.html_rdf = html`${result}`
+                setTimeout(() => {
+                  // Timeout 0 makes sure the div are loaded before updating the displayed sections
+                  // TODO: use lifecycle firstUpdated() or updated()? https://lit.dev/docs/components/lifecycle/#reactive-update-cycle
+                  this._applyDisplay("displayPrefixes")
+                  this._applyDisplay("displayHead")
+                  if (this.hidePubinfo) this.displayPubinfo = false
+                  this._applyDisplay("displayPubinfo")
+                  if (this.hideProvenance) this.displayProvenance = false
+                  this._applyDisplay("displayProvenance")
+                  if (this.hideAssertion) this.displayAssertion = false
+                  this._applyDisplay("displayAssertion")
+                }, 0)
+              });
+            }
           }
-        }
-    )
+      )
+    }
   }
 
-  updateDisplay(displayProp: string) {
+  /**
+   * Apply display described in the state to a nanopub section in the HTML
+   */
+  _applyDisplay(displayProp: string) {
     const displayLabel = displayProp.substring(7).toLowerCase()
     const ele: HTMLElement|null = this.renderRoot.querySelector(`#nanopub-${displayLabel}`);
     if (ele) {
@@ -238,26 +250,30 @@ export class NanopubDisplay extends LitElement {
     }
   }
 
-  switchDisplay(displayProp: string) {
+  /**
+   * Switch display of a nanopub section, called when checkbox clicked
+   */
+  _switchDisplay(displayProp: string) {
     this[displayProp] = !this[displayProp]
-    this.updateDisplay(displayProp)
+    this._applyDisplay(displayProp)
   }
 
-  openDisplayOptions() {
-    if (!this.showDisplayOptions) this.showDisplayOptions = !this.showDisplayOptions
-    if (this.showDisplayOptions) {
-      // setTimeout(() => {
+  /**
+   * Open the dropdown window to select which nanopub section to display
+   */
+  _openDisplayOptions() {
+    this.showDisplayOptions = !this.showDisplayOptions
+    if (window && this.showDisplayOptions) {
       window.addEventListener('click', this._handleClickOut);
-      // }, 0)
     }
   }
 
+  /**
+   * Close the display selection dropdown window if click outside of it
+   */
   _handleClickOut = (e: any) => {
-    // e.preventDefault();
     const ele: HTMLElement|null = this.renderRoot.querySelector(`.display-checklist`);
-    // const ele: HTMLElement|null = this.renderRoot.querySelector(`.display-checklist-wrapper`);
-    if (!ele?.contains(e.originalTarget)) {
-      // console.log('CLICK OUT! Original target:', e.originalTarget)
+    if (window && !ele?.contains(e.originalTarget)) {
       this.showDisplayOptions = false
       window.removeEventListener('click', this._handleClickOut);
     }
@@ -266,14 +282,14 @@ export class NanopubDisplay extends LitElement {
 
   override render() {
     return html`
-      <div class="nanopub">
+      <div class="nanopub" style=${styleMap({ "background-color": this.error ? npColor.error.toString() : 'inherit' })}>
         ${when(this.prefixes, () => {
           return html`
             @prefix ${Object.keys(this.prefixes)[0]} <<a href="${this.prefixes[Object.keys(this.prefixes)[0]]}" target="_blank" rel="noopener noreferrer">${this.prefixes[Object.keys(this.prefixes)[0]]}</a>> .
 
             ${!this.disableDisplayButton
-              ? html`<div class="display-checklist" tabindex="100" @click="${() => this.openDisplayOptions()}" >
-                  <span class="anchor-display-checklist" >
+              ? html`<div class="display-checklist" tabindex="100" >
+                  <span class="anchor-display-checklist" @click="${() => this._openDisplayOptions()}">
                     ${displayIcon}
                     ${this.showDisplayOptions
                       ? html`Select the sections to display`
@@ -283,28 +299,28 @@ export class NanopubDisplay extends LitElement {
                   ${this.showDisplayOptions
                     ? html`<div class="display-checklist-wrapper">
                       <ul class="items" id="display-checklist-items">
-                        <li>
-                          <label><input type="checkbox" value="displayPrefixes" .checked=${this.displayPrefixes} @click=${(e: any) => this.switchDisplay(e.target.value)} />
+                        <li id="displayPrefixes" @click=${(e: any) => this._switchDisplay(e.target.id)} >
+                          <label><input type="checkbox" value="displayPrefixes" .checked=${this.displayPrefixes} @click=${(e: any) => this._switchDisplay(e.target.value)} />
                             Display prefixes
                           </label>
                         </li>
-                        <li>
-                          <label><input type="checkbox" value="displayHead" .checked=${this.displayHead} @click=${(e: any) => this.switchDisplay(e.target.value)} />
+                        <li id="displayHead" @click=${(e: any) => this._switchDisplay(e.target.id)} >
+                          <label><input type="checkbox" value="displayHead" .checked=${this.displayHead} @click=${(e: any) => this._switchDisplay(e.target.value)} />
                             Display Head graph
                           </label>
                         </li>
-                        <li>
-                          <label><input type="checkbox" value="displayAssertion" .checked=${this.displayAssertion} @click=${(e: any) => this.switchDisplay(e.target.value)} />
+                        <li id="displayAssertion" @click=${(e: any) => this._switchDisplay(e.target.id)} >
+                          <label><input type="checkbox" value="displayAssertion" .checked=${this.displayAssertion} @click=${(e: any) => this._switchDisplay(e.target.value)} />
                             Display Assertion graph
                           </label>
                         </li>
-                        <li>
-                          <label><input type="checkbox" value="displayProvenance" .checked=${this.displayProvenance} @click=${(e: any) => this.switchDisplay(e.target.value)} />
+                        <li id="displayProvenance" @click=${(e: any) => this._switchDisplay(e.target.id)} >
+                          <label><input type="checkbox" value="displayProvenance" .checked=${this.displayProvenance} @click=${(e: any) => this._switchDisplay(e.target.value)} />
                             Display Provenance graph
                           </label>
                         </li>
-                        <li>
-                          <label><input type="checkbox" value="displayPubinfo" .checked=${this.displayPubinfo} @click=${(e: any) => this.switchDisplay(e.target.value)} />
+                        <li id="displayPubinfo" @click=${(e: any) => this._switchDisplay(e.target.id)} >
+                          <label><input type="checkbox" value="displayPubinfo" .checked=${this.displayPubinfo} @click=${(e: any) => this._switchDisplay(e.target.value)} />
                             Display PubInfo graph
                           </label>
                         </li>
@@ -328,20 +344,27 @@ export class NanopubDisplay extends LitElement {
             </div>`
         })}
         ${html`${this.html_rdf}`}
+        ${when(this.error, () => html`
+          <div class="error-message">
+            ${this.error}
+          </div>
+        `)}
+        ${when(!this.html_rdf && !this.error, () => html`Loading...`)}
       </div>
-      ${when(!this.html_rdf, () => html`Loading...`)}
     `;
   }
-
 }
 
+
 const displayIcon = html`<svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 -80 1000 1000"><path d="M480.118 726Q551 726 600.5 676.382q49.5-49.617 49.5-120.5Q650 485 600.382 435.5q-49.617-49.5-120.5-49.5Q409 386 359.5 435.618q-49.5 49.617-49.5 120.5Q310 627 359.618 676.5q49.617 49.5 120.5 49.5Zm-.353-58Q433 668 400.5 635.265q-32.5-32.736-32.5-79.5Q368 509 400.735 476.5q32.736-32.5 79.5-32.5Q527 444 559.5 476.735q32.5 32.736 32.5 79.5Q592 603 559.265 635.5q-32.736 32.5-79.5 32.5ZM480 856q-146 0-264-83T40 556q58-134 176-217t264-83q146 0 264 83t176 217q-58 134-176 217t-264 83Zm0-300Zm-.169 240Q601 796 702.5 730.5 804 665 857 556q-53-109-154.331-174.5-101.332-65.5-222.5-65.5Q359 316 257.5 381.5 156 447 102 556q54 109 155.331 174.5 101.332 65.5 222.5 65.5Z"/></svg>`
+
 
 declare global {
   interface HTMLElementTagNameMap {
     'nanopub-display': NanopubDisplay;
   }
 }
+
 // declare namespace JSX {
 //   interface IntrinsicElements {
 //       "nanopub-display": React.DetailedHTMLProps<
