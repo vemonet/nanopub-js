@@ -13,7 +13,7 @@ body {
   margin: 0;
   color: #333;
   font-family: 'Open Sans', arial, sans-serif;
-  min-width: min-content;
+  /* min-width: min-content; */
   min-height: 100vh;
   font-size: 18px;
   display: flex;
@@ -27,7 +27,7 @@ body {
 
 main {
   max-width: 1024px;
-  margin: 0 auto;
+  margin: 0 8px;
 }
 
 header {
@@ -36,6 +36,7 @@ header {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  text-align: center;
   /* height: 360px; */
   padding-top: 10px;
   padding-bottom: 30px;
