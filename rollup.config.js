@@ -14,7 +14,7 @@ export default {
       format: 'esm',
     },
   ],
-  // No external for testing, evything needs to be bundled
+  // No external for testing, everything needs to be bundled
   external: process.env.BUNDLE ? [] : [/lit/, /n3/],
   plugins: [
     replace({

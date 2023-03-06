@@ -5,6 +5,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy('docs/docs.css');
   eleventyConfig.addPassthroughCopy('docs/prism-solarizeddark.css');
   eleventyConfig.addPassthroughCopy('docs/.nojekyll');
+  eleventyConfig.addPassthroughCopy('dist/*');
   eleventyConfig.addPassthroughCopy(
     'node_modules/@webcomponents/webcomponentsjs'
   );
