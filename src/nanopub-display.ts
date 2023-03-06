@@ -328,6 +328,7 @@ export class NanopubDisplay extends LitElement {
                   <span
                     class="anchor-display-checklist"
                     @click="${() => this._openDisplayOptions()}"
+                    @touchstart="${() => this._openDisplayOptions()}"
                   >
                     ${displayIcon}
                     ${this.showDisplayOptions
