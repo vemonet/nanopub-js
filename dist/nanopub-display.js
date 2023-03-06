@@ -2651,6 +2651,7 @@ let NanopubDisplay = class NanopubDisplay extends s {
                   <span
                     class="anchor-display-checklist"
                     @click="${() => this._openDisplayOptions()}"
+                    @touchstart="${() => this._openDisplayOptions()}"
                   >
                     ${displayIcon}
                     ${this.showDisplayOptions
