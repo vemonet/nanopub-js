@@ -82,7 +82,7 @@ jobs:
 
     - name: Build docs
       run: |
-        yarn build:docs
+        yarn docs:build
 
     # Docs: https://github.com/peaceiris/actions-gh-pages
     - name: Deploy to GitHub Pages
