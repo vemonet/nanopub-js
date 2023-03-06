@@ -30,11 +30,11 @@ declare global {
 }
 declare namespace LocalJSX {
     interface NanopubDisplay {
-        "url"?: string;
-        "rdf"?: string;
+        url?: string;
+        rdf?: string;
     }
     interface IntrinsicElements {
-        "nanopub-display": NanopubDisplay;
+        'nanopub-display': NanopubDisplay;
     }
 }
 export { LocalJSX as JSX };
