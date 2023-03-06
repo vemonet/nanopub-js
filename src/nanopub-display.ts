@@ -95,7 +95,7 @@ export class NanopubDisplay extends LitElement {
       position: relative;
       min-width: 100px;
       text-align: left;
-      width: fit-content;
+      width: max-content;
       padding: 2px;
       margin: 0;
       border: 1px solid #ccc;
