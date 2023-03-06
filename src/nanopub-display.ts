@@ -479,3 +479,28 @@ declare global {
 //       };
 //   }
 // }
+
+declare namespace LocalJSX {
+  interface NanopubDisplay {
+      /**
+        * The URL
+       */
+      "url"?: string;
+      /**
+        * The RDF
+       */
+      "rdf"?: string;
+  }
+  interface IntrinsicElements {
+      "nanopub-display": NanopubDisplay;
+  }
+}
+export { LocalJSX as JSX };
+
+// declare module "@stencil/core" {
+//   export namespace JSX {
+//       interface IntrinsicElements {
+//           "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+//       }
+//   }
+// }
