@@ -1,12 +1,21 @@
 # 🧬 Web Component to display Nanopublications
 
+[![Run tests and update docs](https://github.com/vemonet/nanopub-display/actions/workflows/build.yml/badge.svg)](https://github.com/vemonet/nanopub-display/actions/workflows/build.yml)
+
 A standard Web Component to display [Nanopublications](https://nanopub.net).
 
 This document contains details on the development workflow used for the component.
 
 Refer to the documentation website for more details on how to use the component: **[vemonet.github.io/nanopub-display](https://vemonet.github.io/nanopub-display)**
 
-## 📥️ Setup
+## 📥️ Install
+
+Clone the repository:
+
+```bash
+git clone https://github.com/vemonet/nanopub-display
+cd nanopub-display
+```
 
 Install dependencies:
 
@@ -16,7 +25,7 @@ yarn
 
 ## 🧑‍💻 Development
 
-Start the component in development:
+Start the component in development mode, it will automatically reload when the code is changed:
 
 ```bash
 yarn dev
@@ -38,7 +47,7 @@ To watch files and rebuild when the files are modified, run the following comman
 yarn build:watch
 ```
 
-## ✅ Testing
+## ☑️ Testing
 
 This sample uses modern-web.dev's [@web/test-runner](https://www.npmjs.com/package/@web/test-runner) for testing. See the [modern-web.dev testing documentation](https://modern-web.dev/docs/test-runner/overview) for more information.
 
@@ -64,7 +73,7 @@ Alternatively the `test:prod` and `test:prod:watch` commands will run your tests
 
 Prettier has not been configured to run when committing files, but this can be added with Husky and `pretty-quick`. See the [prettier.io](https://prettier.io/) site for instructions.
 
-## ☑️ Linting
+## ✅ Linting
 
 Linting of TypeScript files is provided by [ESLint](eslint.org) and [TypeScript ESLint](https://github.com/typescript-eslint/typescript-eslint). In addition, [lit-analyzer](https://www.npmjs.com/package/lit-analyzer) is used to type-check and lint lit-html templates with the same engine and rules as lit-plugin.
 
