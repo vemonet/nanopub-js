@@ -1,0 +1,554 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "src/n3-writer.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "NanopubWriter",
+          "members": [
+            {
+              "kind": "field",
+              "name": "_lists",
+              "type": {
+                "text": "any"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "_baseMatcher",
+              "type": {
+                "text": "any"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "_baseLength",
+              "type": {
+                "text": "any"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "_prefixRegex",
+              "type": {
+                "text": "any"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "_prefixIRIs",
+              "type": {
+                "text": "any"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "_inDefaultGraph",
+              "type": {
+                "text": "any"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "_graph",
+              "type": {
+                "text": "any"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "_subject",
+              "type": {
+                "text": "any"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "_predicate",
+              "type": {
+                "text": "any"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "_blockedWrite",
+              "type": {
+                "text": "any"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "_outputStream",
+              "type": {
+                "text": "any"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "_endStream",
+              "type": {
+                "text": "any"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "_encodeSubject",
+              "type": {
+                "text": "any"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "_encodePredicate",
+              "type": {
+                "text": "any"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "_encodeObject",
+              "type": {
+                "text": "any"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "_write",
+              "type": {
+                "text": "any"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "_encodeIriOrBlank",
+              "parameters": [
+                {
+                  "name": "entity",
+                  "type": {
+                    "text": "any"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "_writeQuad",
+              "parameters": [
+                {
+                  "name": "subject",
+                  "type": {
+                    "text": "any"
+                  }
+                },
+                {
+                  "name": "predicate",
+                  "type": {
+                    "text": "any"
+                  }
+                },
+                {
+                  "name": "object",
+                  "type": {
+                    "text": "any"
+                  }
+                },
+                {
+                  "name": "graph",
+                  "type": {
+                    "text": "any"
+                  }
+                },
+                {
+                  "name": "done",
+                  "type": {
+                    "text": "any"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "addPrefixes",
+              "parameters": [
+                {
+                  "name": "prefixes",
+                  "type": {
+                    "text": "any"
+                  }
+                },
+                {
+                  "name": "done",
+                  "type": {
+                    "text": "any"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "end",
+              "parameters": [
+                {
+                  "name": "done",
+                  "type": {
+                    "text": "any"
+                  }
+                }
+              ]
+            }
+          ],
+          "superclass": {
+            "name": "Writer",
+            "package": "n3"
+          }
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "NanopubWriter",
+          "declaration": {
+            "name": "NanopubWriter",
+            "module": "src/n3-writer.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/nanopub-display.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A component to display a Nanopublication.",
+          "name": "NanopubDisplay",
+          "members": [
+            {
+              "kind": "field",
+              "name": "url",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The URL of the nanopublication to display",
+              "attribute": "url"
+            },
+            {
+              "kind": "field",
+              "name": "rdf",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The RDF string of the nanopublication to display. Will be downloaded from URL if not provided.",
+              "attribute": "rdf"
+            },
+            {
+              "kind": "field",
+              "name": "displayPrefixes",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Display the prefixes section, or not",
+              "attribute": "displayPrefixes"
+            },
+            {
+              "kind": "field",
+              "name": "displayHead",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Display the Head graph section, or not",
+              "attribute": "displayHead"
+            },
+            {
+              "kind": "field",
+              "name": "displayPubinfo",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "description": "Display the PubInfo graph section, or not",
+              "attribute": "displayPubinfo"
+            },
+            {
+              "kind": "field",
+              "name": "displayProvenance",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "description": "Display the Provenance graph section, or not",
+              "attribute": "displayProvenance"
+            },
+            {
+              "kind": "field",
+              "name": "displayAssertion",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "description": "Display the Assertion graph section, or not",
+              "attribute": "displayAssertion"
+            },
+            {
+              "kind": "field",
+              "name": "hidePubinfo",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Hide the PubInfo graph by default",
+              "attribute": "hidePubinfo"
+            },
+            {
+              "kind": "field",
+              "name": "hideProvenance",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Hide the Provenance graph by default",
+              "attribute": "hideProvenance"
+            },
+            {
+              "kind": "field",
+              "name": "hideAssertion",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Hide the Assertion graph by default",
+              "attribute": "hideAssertion"
+            },
+            {
+              "kind": "field",
+              "name": "disableDisplayButton",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Disable the button to change which sections of the nanopub are displayed",
+              "attribute": "disableDisplayButton"
+            },
+            {
+              "kind": "field",
+              "name": "showDisplayOptions",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Boolean to know if the window to change which sections of the nanopub are displayed is opened"
+            },
+            {
+              "kind": "field",
+              "name": "html_rdf",
+              "type": {
+                "text": "any | undefined"
+              },
+              "description": "The HTML generated from the RDF to display the nanopub"
+            },
+            {
+              "kind": "field",
+              "name": "prefixes",
+              "type": {
+                "text": "any | undefined"
+              },
+              "description": "A dictionary with the prefixes and namespaces used in the nanopub"
+            },
+            {
+              "kind": "field",
+              "name": "error",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "Error message to show if there is a problem displaying the nanopub"
+            },
+            {
+              "kind": "method",
+              "name": "_applyDisplay",
+              "parameters": [
+                {
+                  "name": "displayProp",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ],
+              "description": "Apply display described in the state to a nanopub section in the HTML"
+            },
+            {
+              "kind": "method",
+              "name": "_switchDisplay",
+              "parameters": [
+                {
+                  "name": "displayProp",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ],
+              "description": "Switch display of a nanopub section, called when checkbox clicked"
+            },
+            {
+              "kind": "method",
+              "name": "_openDisplayOptions",
+              "description": "Open the dropdown window to select which nanopub section to display"
+            },
+            {
+              "kind": "field",
+              "name": "_handleClickOut",
+              "description": "Close the display selection dropdown window if click outside of it"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "url",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The URL of the nanopublication to display",
+              "fieldName": "url"
+            },
+            {
+              "name": "rdf",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The RDF string of the nanopublication to display. Will be downloaded from URL if not provided.",
+              "fieldName": "rdf"
+            },
+            {
+              "name": "displayPrefixes",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Display the prefixes section, or not",
+              "fieldName": "displayPrefixes"
+            },
+            {
+              "name": "displayHead",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Display the Head graph section, or not",
+              "fieldName": "displayHead"
+            },
+            {
+              "name": "displayPubinfo",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "description": "Display the PubInfo graph section, or not",
+              "fieldName": "displayPubinfo"
+            },
+            {
+              "name": "displayProvenance",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "description": "Display the Provenance graph section, or not",
+              "fieldName": "displayProvenance"
+            },
+            {
+              "name": "displayAssertion",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true",
+              "description": "Display the Assertion graph section, or not",
+              "fieldName": "displayAssertion"
+            },
+            {
+              "name": "hidePubinfo",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Hide the PubInfo graph by default",
+              "fieldName": "hidePubinfo"
+            },
+            {
+              "name": "hideProvenance",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Hide the Provenance graph by default",
+              "fieldName": "hideProvenance"
+            },
+            {
+              "name": "hideAssertion",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Hide the Assertion graph by default",
+              "fieldName": "hideAssertion"
+            },
+            {
+              "name": "disableDisplayButton",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Disable the button to change which sections of the nanopub are displayed",
+              "fieldName": "disableDisplayButton"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "nanopub-display",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "NanopubDisplay",
+          "declaration": {
+            "name": "NanopubDisplay",
+            "module": "src/nanopub-display.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "nanopub-display",
+          "declaration": {
+            "name": "NanopubDisplay",
+            "module": "src/nanopub-display.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "JSX",
+          "declaration": {
+            "name": "LocalJSX",
+            "module": "src/nanopub-display.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/test/nanopub-display_test.ts",
+      "declarations": [],
+      "exports": []
+    }
+  ]
+}

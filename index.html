@@ -1,0 +1,67 @@
+
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>nanopub-display</title>
+    <link rel="icon" href="https://nanopub.net/img/icon.png" />
+    <link rel="stylesheet" href="docs.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600|Roboto+Mono">
+
+    <link href="prism-solarizeddark.css" rel="stylesheet" />
+
+    <script type="module" src="dist/nanopub-display.js"></script>
+  </head>
+  <body>
+    
+<header>
+  <h1>&lt;nanopub-display></h1>
+  <h2>A web component to display Nanopublications 🔬</h2>
+</header>
+    
+<nav>
+  <a href="">Home</a>
+  <a href="install/">Install</a>
+  <a href="api/">API</a>
+  <a href="https://github.com/vemonet/nanopub-display" target="_blank" rel="noopener noreferrer">
+    <svg class="svgColor" width="22" height="22" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8C0 11.54 2.29 14.53 5.47 15.59C5.87 15.66 6.02 15.42 6.02 15.21C6.02 15.02 6.01 14.39 6.01 13.72C4 14.09 3.48 13.23 3.32 12.78C3.23 12.55 2.84 11.84 2.5 11.65C2.22 11.5 1.82 11.13 2.49 11.12C3.12 11.11 3.57 11.7 3.72 11.94C4.44 13.15 5.59 12.81 6.05 12.6C6.12 12.08 6.33 11.73 6.56 11.53C4.78 11.33 2.92 10.64 2.92 7.58C2.92 6.71 3.23 5.99 3.74 5.43C3.66 5.23 3.38 4.41 3.82 3.31C3.82 3.31 4.49 3.1 6.02 4.13C6.66 3.95 7.34 3.86 8.02 3.86C8.7 3.86 9.38 3.95 10.02 4.13C11.55 3.09 12.22 3.31 12.22 3.31C12.66 4.41 12.38 5.23 12.3 5.43C12.81 5.99 13.12 6.7 13.12 7.58C13.12 10.65 11.25 11.33 9.47 11.53C9.76 11.78 10.01 12.26 10.01 13.01C10.01 14.08 10 14.94 10 15.21C10 15.42 10.15 15.67 10.55 15.59C13.71 14.53 16 11.53 16 8C16 3.58 12.42 0 8 0Z" transform="scale(64)" fill="#1B1F23"/>
+    </svg>
+  </a>
+</nav>
+    <div id="main-wrapper">
+      <main>
+        <br/>
+<p><code>&lt;nanopub-display&gt;</code> is a standard web component to easily display <a href="https://nanopub.net">Nanopublications</a> anywhere you can use HTML.</p>
+<p>It enables developers and users to control which graphs from the nanopublication are displayed.</p>
+<h2>🏷️ As easy as HTML</h2>
+<section>
+  <div>
+<p><code>&lt;nanopub-display&gt;</code> is just an HTML element, you can use it anywhere you can use HTML:</p>
+<pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>en<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><br>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span><br>    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>module<span class="token punctuation">"</span></span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://unpkg.com/nanopub-display?module<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span><br>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span><br><br>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span><br>    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value css language-css"><span class="token property">min-height</span><span class="token punctuation">:</span> 100vh<span class="token punctuation">;</span> <span class="token property">width</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span></span><span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span><br>      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nanopub-display</span><br>        <span class="token attr-name">url</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://purl.org/np/RAHtkscyyyJDLvWRuINckQrn5rbHzQKvwakNVC3fmRzGU<span class="token punctuation">"</span></span><br>      <span class="token punctuation">/></span></span><br>    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span><br>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span><br><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span></code></pre>
+  </div>
+  <div>
+<p><nanopub-display url="https://purl.org/np/RAHtkscyyyJDLvWRuINckQrn5rbHzQKvwakNVC3fmRzGU"></nanopub-display></p>
+  </div>
+</section>
+<h2>💫 Declarative rendering</h2>
+<section>
+  <div>
+<p><code>&lt;nanopub-display&gt;</code> can be used with declarative rendering libraries like Angular, React, Vue, and lit-html</p>
+<pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span>html<span class="token punctuation">,</span> render<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'lit-html'</span><span class="token punctuation">;</span><br><br><span class="token keyword">const</span> np <span class="token operator">=</span> <span class="token string">'https://purl.org/np/RAHtkscyyyJDLvWRuINckQrn5rbHzQKvwakNVC3fmRzGU'</span><span class="token punctuation">;</span><br><br><span class="token function">render</span><span class="token punctuation">(</span><br>  html<span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string"><br>    &lt;h4>This is a &amp;lt;nanopub-display&amp;gt;&lt;/h4><br>    &lt;nanopub-display url=</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>np<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> /><br>  </span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span><br>  document<span class="token punctuation">.</span>body<br><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+  </div>
+  <div>
+<h4>This is a &lt;nanopub-display&gt;</h4>
+<nanopub-display url="https://purl.org/np/RAHtkscyyyJDLvWRuINckQrn5rbHzQKvwakNVC3fmRzGU"></nanopub-display>
+  </div>
+</section>
+
+      </main>
+    </div>
+    
+<footer>
+</footer>
+  </body>
+</html>
