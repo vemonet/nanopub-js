@@ -29,7 +29,7 @@
     "build:vite": "vite build",
     "docs": "yarn docs:prebuild && yarn docs:serve",
     "docs:build": "yarn docs:prebuild && eleventy",
-    "docs:prebuild": "rimraf docs-dist && tsc --outDir docs-dist && yarn analyze && rollup -c --file docs-dist/nanopub-display.min.js && cp node_modules/prismjs/themes/prism-okaidia.css docs-dist/",
+    "docs:prebuild": "rimraf docs-dist && tsc --outDir docs-dist && yarn analyze && rollup -c --file docs-dist/nanopub-display.js && cp node_modules/prismjs/themes/prism-okaidia.css docs-dist/",
     "docs:serve": "eleventy --serve",
     "docs:ghpages": "eleventy --pathprefix=/nanopub-display/",
     "analyze": "cem analyze --litelement --globs \"src/**/*.ts\" --outdir dist",
