@@ -37,7 +37,7 @@
     "test:build": "tsc && BUNDLE=true rollup -c",
     "test:prod": "yarn test && MODE=prod wtr",
     "test:all": "yarn test:dev && yarn test:prod",
-    "format": "prettier \"**/*.{cjs,html,js,json,md,ts}\" --ignore-path ./.eslintignore --write",
+    "fmt": "prettier \"**/*.{cjs,html,js,json,md,ts}\" --ignore-path ./.eslintignore --write",
     "lint": "lit-analyzer && eslint 'src/**/*.ts' --fix"
   },
   "keywords": [

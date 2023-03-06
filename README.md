@@ -60,7 +60,7 @@ Alternatively the `test:prod` command will run your tests in Lit's production mo
 [Prettier](https://prettier.io/) is used for code formatting:
 
 ```bash
-yarn format
+yarn fmt
 ```
 
 > You can change the configuration in the `package.json`. Prettier has not been configured to run when committing files, but this can be added with Husky and `pretty-quick`. See the [prettier.io](https://prettier.io/) site for instructions.
