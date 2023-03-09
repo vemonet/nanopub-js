@@ -4,6 +4,11 @@ docs-dist/
 /lib/
 /test/
 *.lock
+# Ignore yarn v3 files
+.yarn/
+.pnp*.[cm]js
+.yarnrc.yml
+pnpm-lock.yaml
 
 # Logs
 logs

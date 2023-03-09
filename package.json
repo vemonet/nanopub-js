@@ -49,6 +49,7 @@
   ],
   "dependencies": {
     "lit": "^2.2.4",
+    "lit-html": "^2.6.1",
     "n3": "^1.16.3"
   },
   "devDependencies": {
