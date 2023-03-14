@@ -94,3 +94,5 @@ yarn docs:build
 🔨 Built with [Lit](https://lit.dev/) and [N3.js](https://github.com/rdfjs/N3.js)
 
 Vite TS starter: https://github.com/vitejs/vite/tree/main/packages/create-vite/template-lit-ts
+
+Official lit TS starter: https://github.com/lit/lit-element-starter-ts

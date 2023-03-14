@@ -11,9 +11,6 @@
   "types": "dist/nanopub-display.d.ts",
   "unpkg": "dist/nanopub-display.min.js",
   "customElements": "dist/custom-elements.json",
-  "files": [
-    "dist"
-  ],
   "exports": {
     ".": {
       "types": "./dist/nanopub-display.d.ts",
