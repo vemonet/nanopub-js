@@ -62,17 +62,14 @@ export default defineConfig({
 });
 
 const rollupPlugins = [
-  typescript({
-    "compilerOptions": {
-      "outDir": "dist",
-      "declaration": true,
-      "declarationDir": "."
-    }
-  }),
-  // nodeGlobals(),
-  commonjs({
-    // extensions: ['.js', '.ts'],
-    // include: [/n3/],
-  }),
+  typescript(),
+  // typescript({
+  //   "compilerOptions": {
+  //     "outDir": "dist",
+  //     "declaration": true,
+  //     "declarationDir": "."
+  //   }
+  // }),
+  commonjs(),
   nodeResolve({preferBuiltins: true, browser: true}),
 ];

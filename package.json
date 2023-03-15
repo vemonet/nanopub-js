@@ -21,8 +21,8 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "build:rollup": "rimraf dist && tsc && rollup -c && rollup -c rollup.min.config.js",
+    "build": "rimraf dist && tsc && rollup -c",
+    "build:vite": "vite build",
     "build:watch": "tsc --watch",
     "docs": "yarn docs:prebuild && yarn docs:serve",
     "docs:build": "yarn docs:prebuild && eleventy",
@@ -34,8 +34,8 @@
     "test:build": "tsc && BUNDLE=true rollup -c",
     "test:prod": "yarn test && MODE=prod wtr",
     "test:all": "yarn test:dev && yarn test:prod",
-    "fmt": "prettier \"**/*.{cjs,html,js,json,md,ts}\" --ignore-path ./.eslintignore --write",
-    "lint": "lit-analyzer && eslint 'src/**/*.ts' --fix"
+    "fmt": "prettier \"**/*.{cjs,html,js,json,md,ts}\" --ignore-path .gitignore --write",
+    "lint": "lit-analyzer && eslint 'src/**/*.ts' --ignore-path .gitignore --fix"
   },
   "keywords": [
     "nanopublications",
@@ -67,6 +67,7 @@
     "@web/test-runner-playwright": "^0.9.0",
     "@webcomponents/webcomponentsjs": "^2.6.0",
     "eslint": "^8.15.0",
+    "eslint-plugin-lit": "^1.8.2",
     "lit-analyzer": "^1.2.1",
     "prettier": "^2.6.2",
     "rimraf": "^3.0.2",
@@ -79,10 +80,61 @@
     "vite-plugin-dts": "^2.1.0"
   },
   "prettier": {
-    "trailingComma": "es5",
+    "trailingComma": "none",
     "tabWidth": 2,
     "singleQuote": true,
     "bracketSpacing": false,
-    "arrowParens": "always"
+    "arrowParens": "avoid",
+    "useTabs": false,
+    "printWidth": 120,
+    "pluginSearchDirs": [
+      "."
+    ]
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "es2021": true
+    },
+    "extends": [
+      "plugin:@typescript-eslint/recommended",
+      "plugin:lit/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "ecmaVersion": "latest",
+      "sourceType": "module"
+    },
+    "plugins": [
+      "lit",
+      "@typescript-eslint"
+    ],
+    "rules": {
+      "no-prototype-builtins": "off",
+      "no-useless-escape": "off",
+      "no-control-regex": "off",
+      "@typescript-eslint/ban-types": "off",
+      "@typescript-eslint/explicit-function-return-type": "off",
+      "@typescript-eslint/explicit-module-boundary-types": "off",
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/no-empty-function": "off",
+      "@typescript-eslint/no-non-null-assertion": "off",
+      "@typescript-eslint/no-namespace": "off",
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        {
+          "argsIgnorePattern": "^_"
+        }
+      ]
+    },
+    "ignorePatterns": [
+      "*.lock",
+      "node_modules/*",
+      "docs/*",
+      "docs-src/*",
+      "rollup-config.js",
+      "custom-elements.json",
+      "web-dev-server.config.js"
+    ]
   }
 }

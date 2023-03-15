@@ -58,10 +58,10 @@ export class NanopubWriter extends Writer {
       prefixMatch[2] = '';
     }
     return !prefixMatch
-      ? `<<a href="${iri}" ${aTagAttrs}>${iri}</a>>`
+      ? `<<a href="${iri}" title="${iri}" ${aTagAttrs}>${iri}</a>>`
       : !prefixMatch[1]
       ? iri
-      : `<a href="${iri}" ${aTagAttrs}>${
+      : `<a href="${iri}" title="${iri}" ${aTagAttrs}>${
           this._prefixIRIs[prefixMatch[1]] + prefixMatch[2] || ':'
         }</a>`;
   }
