@@ -4,6 +4,178 @@
   "modules": [
     {
       "kind": "javascript-module",
+      "path": "src/cytoscape.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "cytoscapeGetConfig",
+          "parameters": [
+            {
+              "name": "rdf",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "nanopubToCytoscapeElems",
+          "parameters": [
+            {
+              "name": "rdf",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "replacePrefix",
+          "parameters": [
+            {
+              "name": "uri",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "prefixes",
+              "type": {
+                "text": "any"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "displayLink",
+          "parameters": [
+            {
+              "name": "urlString",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "cytoscapeHighlightConnectedEdges",
+          "parameters": [
+            {
+              "name": "e",
+              "type": {
+                "text": "any"
+              }
+            },
+            {
+              "name": "cy",
+              "type": {
+                "text": "any"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "cytoscapeShowNodeOnClick",
+          "parameters": [
+            {
+              "name": "e",
+              "type": {
+                "text": "any"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "variable",
+          "name": "defaultCytoscapeStyle",
+          "type": {
+            "text": "array"
+          },
+          "default": "[\n  {\n    selector: 'edge',\n    style: {\n      label: 'data(label)',\n      color: '#263238', // Grey\n      'line-color': '#263238',\n      width: 2,\n      'arrow-scale': 2,\n      'target-arrow-color': '#263238',\n      // 'target-arrow-color': '#ccc',\n      'text-wrap': 'wrap' as const,\n      'font-size': '30px',\n      'text-opacity': 0.9,\n      'target-arrow-shape': 'triangle' as const,\n      // Control multi edge on 2 nodes:\n      'curve-style': 'bezier' as const,\n      'control-point-step-size': 300\n      // width: 15\n    }\n  },\n  {\n    selector: 'edge:parent',\n    style: {\n      color: '#c62828', // red\n      'line-color': '#c62828',\n      width: 2,\n      'arrow-scale': 2,\n      'target-arrow-color': '#c62828'\n      // 'target-arrow-color': '#ccc',\n    }\n  },\n  // {\n  //   selector: 'edge.highlighted',\n  //   style: {\n  //     'color': '#0d47a1', // blue\n  //   }\n  // },\n  {\n    selector: 'node',\n    style: {\n      label: 'data(label)',\n      'text-wrap': 'wrap' as const,\n      // 'word-break': 'break-all',\n      'overflow-wrap': 'break-word',\n      // 'white-space': 'pre-wrap',\n      'text-max-width': '800px',\n      'font-size': 'data(fontSize)',\n      // 'font-weight': 'data(fontWeight)',\n      'text-valign': 'data(valign)' as const,\n      'text-halign': 'center' as const,\n      width: 'label',\n      // width: 20,\n      height: 'label',\n      padding: '25px',\n      // https://js.cytoscape.org/#style/node-body\n      shape: 'data(shape)',\n      'background-color': 'data(backgroundColor)',\n      color: 'data(textColor)'\n      // \"color\": 'data(color)',\n    }\n  }\n]"
+        },
+        {
+          "kind": "variable",
+          "name": "layoutsConfig",
+          "type": {
+            "text": "object"
+          },
+          "default": "{\n  'cose-bilkent': {\n    name: 'cose-bilkent',\n    // Called on `layoutready`\n    ready: function () {},\n    // Called on `layoutstop`\n    stop: function () {},\n    // 'draft', 'default' or 'proof\"\n    // - 'draft' fast cooling rate\n    // - 'default' moderate cooling rate\n    // - \"proof\" slow cooling rate\n    quality: 'default',\n    // Whether to include labels in node dimensions. Useful for avoiding label overlap\n    nodeDimensionsIncludeLabels: false,\n    // number of ticks per frame; higher is faster but more jerky\n    refresh: 30,\n    // Whether to fit the network view after when done\n    fit: true,\n    // Padding on fit\n    padding: 10,\n    // Whether to enable incremental mode\n    randomize: true,\n    // Node repulsion (non overlapping) multiplier\n    nodeRepulsion: 4500,\n    // Ideal (intra-graph) edge length\n    idealEdgeLength: 200,\n    // Divisor to compute edge forces\n    edgeElasticity: 0.45,\n    // Nesting factor (multiplier) to compute ideal edge length for inter-graph edges\n    nestingFactor: 0.1,\n    // Gravity force (constant)\n    gravity: 0.25,\n    // Maximum number of iterations to perform\n    numIter: 2500,\n    // Whether to tile disconnected nodes\n    tile: true,\n    // Type of layout animation. The option set is {'during', 'end', false}\n    animate: false,\n    // Duration for animate:end\n    animationDuration: 500,\n    // Amount of vertical space to put between degree zero nodes during tiling (can also be a function)\n    tilingPaddingVertical: 10,\n    // Amount of horizontal space to put between degree zero nodes during tiling (can also be a function)\n    tilingPaddingHorizontal: 10,\n    // Gravity range (constant) for compounds\n    gravityRangeCompound: 1.5,\n    // Gravity force (constant) for compounds\n    gravityCompound: 1.0,\n    // Gravity range (constant)\n    gravityRange: 3.8,\n    // Initial cooling factor for incremental layout\n    initialEnergyOnIncremental: 0.5\n  }\n  // 'fcose': {\n  //     name: 'fcose',\n  //     // 'draft', 'default' or 'proof'\n  //     // - \"draft\" only applies spectral layout\n  //     // - \"default\" improves the quality with incremental layout (fast cooling rate)\n  //     // - \"proof\" improves the quality with incremental layout (slow cooling rate)\n  //     quality: \"default\",\n  //     // Use random node positions at beginning of layout\n  //     // if this is set to false, then quality option must be \"proof\"\n  //     randomize: true,\n  //     infinite: false,\n  //     // Whether or not to animate the layout\n  //     animate: false,\n  //     // Duration of animation in ms, if enabled\n  //     animationDuration: 1000,\n  //     // Easing of animation, if enabled\n  //     animationEasing: undefined,\n  //     // Fit the viewport to the repositioned nodes\n  //     fit: true,\n  //     // Padding around layout\n  //     padding: 30,\n  //     // Whether to include labels in node dimensions. Valid in \"proof\" quality\n  //     nodeDimensionsIncludeLabels: true,\n  //     // Whether or not simple nodes (non-compound nodes) are of uniform dimensions\n  //     uniformNodeDimensions: false,\n  //     // Whether to pack disconnected components - cytoscape-layout-utilities extension should be registered and initialized\n  //     packComponents: false,\n  //     // Layout step - all, transformed, enforced, cose - for debug purpose only\n  //     step: \"all\",\n  //     // False for random, true for greedy sampling\n  //     samplingType: true,\n  //     // Sample size to construct distance matrix\n  //     sampleSize: 25,\n  //     // Separation amount between nodes\n  //     nodeSeparation: 200,\n  //     // Power iteration tolerance\n  //     piTol: 0.0000001,\n  //     /* incremental layout options */\n  //     // Node repulsion (non overlapping) multiplier\n  //     nodeRepulsion: (node: any) => 4500,\n  //     // Ideal edge (non nested) length\n  //     idealEdgeLength: (edge: any) => 300,\n  //     // Divisor to compute edge forces\n  //     edgeElasticity: (edge: any) => 0.45,\n  //     // Nesting factor (multiplier) to compute ideal edge length for nested edges\n  //     nestingFactor: 0.4,\n  //     // Maximum number of iterations to perform - this is a suggested value and might be adjusted by the algorithm as required\n  //     numIter: 2500,\n  //     // For enabling tiling\n  //     tile: true,\n  //     // Represents the amount of the vertical space to put between the zero degree members during the tiling operation(can also be a function)\n  //     tilingPaddingVertical: 10,\n  //     // Represents the amount of the horizontal space to put between the zero degree members during the tiling operation(can also be a function)\n  //     tilingPaddingHorizontal: 10,\n  //     // Gravity force (constant)\n  //     gravity: 0.25,\n  //     // Gravity range (constant) for compounds\n  //     gravityRangeCompound: 2,\n  //     // Gravity force (constant) for compounds\n  //     gravityCompound: 0.5,\n  //     // Gravity range (constant)\n  //     gravityRange: 3.8,\n  //     // Initial cooling factor for incremental layout\n  //     initialEnergyOnIncremental: 0.3,\n  //     /* constraint options */\n  //     // Fix desired nodes to predefined positions\n  //     // [{nodeId: 'n1', position: {x: 100, y: 200}}, {...}]\n  //     fixedNodeConstraint: undefined,\n  //     // Align desired nodes in vertical/horizontal direction\n  //     // {vertical: [['n1', 'n2'], [...]], horizontal: [['n2', 'n4'], [...]]}\n  //     alignmentConstraint: undefined,\n  //     // Place two nodes relatively in vertical/horizontal direction\n  //     // [{top: 'n1', bottom: 'n2', gap: 100}, {left: 'n3', right: 'n4', gap: 75}, {...}]\n  //     relativePlacementConstraint: undefined,\n  //     /* layout event callbacks */\n  //     // ready: () => {}, // on layoutready\n  //     // stop: () => {} // on layoutstop\n  // },\n  // 'dagre': {\n  //     name: 'dagre',\n  //     // dagre algo options, uses default value on undefined\n  //     nodeSep: undefined, // the separation between adjacent nodes in the same rank\n  //     edgeSep: undefined, // the separation between adjacent edges in the same rank\n  //     rankSep: undefined, // the separation between each rank in the layout\n  //     rankDir: 'TB', // 'TB' for top to bottom flow, 'LR' for left to right,\n  //     align: 'DR',  // alignment for rank nodes. Can be 'UL', 'UR', 'DL', or 'DR', where U = up, D = down, L = left, and R = right\n  //     acyclicer: undefined, // If set to 'greedy', uses a greedy heuristic for finding a feedback arc set for a graph.\n  //                         // A feedback arc set is a set of edges that can be removed to make a graph acyclic.\n  //     ranker: 'network-simplex', // Type of algorithm to assign a rank to each node in the input graph. Possible values: 'network-simplex', 'tight-tree' or 'longest-path'\n  //     minLen: function( edge: any ){ return 2; }, // number of ranks to keep between the source and target of the edge\n  //     edgeWeight: function( edge: any ){ return 1; }, // higher weight edges are generally made shorter and straighter than lower weight edges\n\n  //     // general layout options\n  //     fit: true, // whether to fit to viewport\n  //     padding: 30, // fit padding\n  //     spacingFactor: 1, // Applies a multiplicative factor (>0) to expand or compress the overall area that the nodes take up\n  //     nodeDimensionsIncludeLabels: true, // whether labels should be included in determining the space used by a node\n  //     animate: false, // whether to transition the node positions\n  //     animateFilter: function( node: any, i: any ){ return true; }, // whether to animate specific nodes when animation is on; non-animated nodes immediately go to their final positions\n  //     animationDuration: 500, // duration of animation in ms if enabled\n  //     animationEasing: undefined, // easing of animation if enabled\n  //     boundingBox: undefined, // constrain layout bounds; { x1, y1, x2, y2 } or { x1, y1, w, h }\n  //     transform: function( node: any, pos: any ){ return pos; }, // a function that applies a transform to the final node position\n  //     ready: function(){}, // on layoutready\n  //     stop: function(){} // on layoutstop\n  // },\n  // 'cola': {\n  //     name: 'cola',\n  //     nodeSpacing: 150,\n  //     // edgeLengthVal: 1000,\n  //     animate: false,\n  //     randomize: false,\n  //     maxSimulationTime: 1500\n  // },\n  // // Spread: https://github.com/cytoscape/cytoscape.js-spread\n  // 'spread': {\n  //     name: 'spread',\n  //     animate: true, // Whether to show the layout as it's running\n  //     ready: undefined, // Callback on layoutready\n  //     stop: undefined, // Callback on layoutstop\n  //     fit: true, // Reset viewport to fit default simulationBounds\n  //     minDist: 20, // Minimum distance between nodes\n  //     padding: 20, // Padding\n  //     expandingFactor: -1.0, // If the network does not satisfy the minDist\n  //     // criterium then it expands the network of this amount\n  //     // If it is set to -1.0 the amount of expansion is automatically\n  //     // calculated based on the minDist, the aspect ratio and the\n  //     // number of nodes\n  //     prelayout: { name: 'cose' }, // Layout options for the first phase\n  //     maxExpandIterations: 4, // Maximum number of expanding iterations\n  //     boundingBox: undefined, // Constrain layout bounds; { x1, y1, x2, y2 } or { x1, y1, w, h }\n  //     randomize: false // Uses random initial node positions on true\n  // },\n}"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "cytoscapeGetConfig",
+          "declaration": {
+            "name": "cytoscapeGetConfig",
+            "module": "src/cytoscape.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "nanopubToCytoscapeElems",
+          "declaration": {
+            "name": "nanopubToCytoscapeElems",
+            "module": "src/cytoscape.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "replacePrefix",
+          "declaration": {
+            "name": "replacePrefix",
+            "module": "src/cytoscape.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "displayLink",
+          "declaration": {
+            "name": "displayLink",
+            "module": "src/cytoscape.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "cytoscapeHighlightConnectedEdges",
+          "declaration": {
+            "name": "cytoscapeHighlightConnectedEdges",
+            "module": "src/cytoscape.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "cytoscapeShowNodeOnClick",
+          "declaration": {
+            "name": "cytoscapeShowNodeOnClick",
+            "module": "src/cytoscape.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "defaultCytoscapeStyle",
+          "declaration": {
+            "name": "defaultCytoscapeStyle",
+            "module": "src/cytoscape.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "layoutsConfig",
+          "declaration": {
+            "name": "layoutsConfig",
+            "module": "src/cytoscape.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/index.ts",
       "declarations": [],
       "exports": [
@@ -21,6 +193,14 @@
           "declaration": {
             "name": "*",
             "package": "./n3-writer"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "package": "./cytoscape"
           }
         }
       ]
