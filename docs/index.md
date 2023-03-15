@@ -11,8 +11,6 @@ It enables developers and users to control which graphs from the nanopublication
 
 ## 🏷️ As easy as HTML
 
-<section>
-  <div>
 
 `<nanopub-display>` is just an HTML element, you can use it anywhere you can use HTML:
 
@@ -30,20 +28,12 @@ It enables developers and users to control which graphs from the nanopublication
 </html>
 ```
 
-  </div>
-  <div>
 
 <nanopub-display url="https://purl.org/np/RAHtkscyyyJDLvWRuINckQrn5rbHzQKvwakNVC3fmRzGU"></nanopub-display>
 
-  </div>
-</section>
-
 ## 💫 Declarative rendering
 
-<section>
-  <div>
-
-`<nanopub-display>` can be used with declarative rendering libraries like Angular, React, Vue, and lit-html
+`<nanopub-display>` can be used with declarative rendering libraries like React, Angular, Vue, and lit-html
 
 ```js
 import {html, render} from 'lit-html';
@@ -58,3 +48,42 @@ render(
   document.body
 );
 ```
+
+## 🕸️ Cytoscape configuration
+
+`@nanopub/display` can also be used to generate a cytoscape configuration to easily display your nanopublication with [CytoscapeJS](https://js.cytoscape.org).
+
+⚠️ Cytoscape is not imported by `@nanopub/display`, you will need to make sure to install the following packages first:
+
+```bash
+npm install --save cytoscape cytoscape-cose-bilkent cytoscape-popper
+# or
+yarn add cytoscape cytoscape-cose-bilkent cytoscape-popper
+```
+
+The code below shows how to easily generate the cytoscape configuration, please refer to the [cytoscape documentation](https://js.cytoscape.org/#getting-started) to see how to setup your cytoscape container.
+
+```ts
+import {cytoscapeGetConfig, cytoscapeShowNodeOnClick, cytoscapeHighlightConnectedEdges} from '@nanopub/display';
+import cytoscape, { Core } from 'cytoscape';
+import popper from 'cytoscape-popper';
+import COSEBilkent from 'cytoscape-cose-bilkent';
+
+// Get the cytoscape div container, and nanopub RDF
+const cyContainer?: HTMLDivElement;
+const nanopubTrigRdfString?: string;
+
+// Generate the cytoscape config for a given nanopub RDF
+const cytoscapeConfig = getCytoscapeConfig(nanopubTrigRdfString),
+
+// Provide the generated config and cytoscape container to the cytoscape builder
+const cy = cytoscape({
+    ...cytoscapeConfig,
+    container: cyContainer
+})
+
+// Hightlight connected and show a card with the content of the node on click
+cy.on('tap', "node", (e: any) => cytoscapeHighlightConnectedEdges(e, cy))
+cy.on('tap', 'node', cytoscapeShowNodeOnClick);
+```
+
