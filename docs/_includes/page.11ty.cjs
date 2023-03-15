@@ -28,7 +28,7 @@ module.exports = function (data) {
 
     <link href="${relative(page.url, '/prism-solarizeddark.css')}" rel="stylesheet" />
 
-    <script type="module" src="${relative(page.url, '/dist/nanopub-display.js')}"></script>
+    <script type="module" src="${relative(page.url, '/dist/nanopub-display.bundle.js')}"></script>
   </head>
   <body>
     ${header()}

@@ -8,12 +8,12 @@
   "type": "module",
   "main": "dist/nanopub-display.js",
   "module": "dist/nanopub-display.js",
-  "types": "dist/nanopub-display.d.ts",
   "unpkg": "dist/nanopub-display.min.js",
+  "types": "dist/index.d.ts",
   "customElements": "dist/custom-elements.json",
   "exports": {
     ".": {
-      "types": "./dist/nanopub-display.d.ts",
+      "types": "./dist/index.d.ts",
       "default": "./dist/nanopub-display.js"
     },
     "./custom-elements.json": "./dist/custom-elements.json",
@@ -21,14 +21,15 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "rimraf dist && tsc && rollup -c",
+    "build:coco": "rimraf dist && tsc && rollup -c --file dist/nanopub-display.js && BUNDLE=true rollup -c --file dist/nanopub-display.min.js && yarn cem",
+    "build": "rimraf dist && tsc && rollup -c && yarn cem",
     "build:vite": "vite build",
     "build:watch": "tsc --watch",
+    "cem": "cem analyze --litelement --globs \"src/**/*.ts\" --outdir dist",
     "docs": "yarn docs:prebuild && yarn docs:serve",
     "docs:build": "yarn docs:prebuild && eleventy",
-    "docs:prebuild": "rimraf docs-dist && BUNDLE=true yarn build && yarn docs:analyze",
+    "docs:prebuild": "rimraf docs-dist && yarn build",
     "docs:serve": "eleventy --serve",
-    "docs:analyze": "cem analyze --litelement --globs \"src/**/*.ts\" --outdir dist",
     "docs:ghpages": "eleventy --pathprefix=/nanopub-display/",
     "test": "yarn test:build && wtr",
     "test:build": "tsc && BUNDLE=true rollup -c",
