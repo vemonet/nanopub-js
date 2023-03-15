@@ -51,12 +51,6 @@
   <div>
 <p><code>&lt;nanopub-display&gt;</code> can be used with declarative rendering libraries like Angular, React, Vue, and lit-html</p>
 <pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span>html<span class="token punctuation">,</span> render<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'lit-html'</span><span class="token punctuation">;</span><br><br><span class="token keyword">const</span> np <span class="token operator">=</span> <span class="token string">'https://purl.org/np/RAHtkscyyyJDLvWRuINckQrn5rbHzQKvwakNVC3fmRzGU'</span><span class="token punctuation">;</span><br><br><span class="token function">render</span><span class="token punctuation">(</span><br>  html<span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string"><br>    &lt;h4>This is a &amp;lt;nanopub-display&amp;gt;&lt;/h4><br>    &lt;nanopub-display url=</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>np<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> /><br>  </span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span><br>  document<span class="token punctuation">.</span>body<br><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
-  </div>
-  <div>
-<h4>This is a &lt;nanopub-display&gt;</h4>
-<nanopub-display url="https://purl.org/np/RAHtkscyyyJDLvWRuINckQrn5rbHzQKvwakNVC3fmRzGU"></nanopub-display>
-  </div>
-</section>
 
       </main>
     </div>
