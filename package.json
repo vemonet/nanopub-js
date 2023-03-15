@@ -1,9 +1,12 @@
 {
   "name": "@nanopub/display",
-  "private": true,
   "version": "0.0.1",
   "description": "A web component to display Nanopublications",
-  "author": "Vincent Emonet",
+  "author": {
+    "name": "Vincent Emonet",
+    "email": "vincent.emonet@gmail.com",
+    "url": "https://vemonet.github.io"
+  },
   "license": "MIT",
   "type": "module",
   "main": "dist/nanopub-display.js",
@@ -36,7 +39,8 @@
     "test:prod": "yarn test && MODE=prod wtr",
     "test:all": "yarn test:dev && yarn test:prod",
     "fmt": "prettier \"**/*.{cjs,html,js,json,md,ts}\" --ignore-path .gitignore --write",
-    "lint": "eslint 'src/**/*.ts' --ignore-path .gitignore --fix && lit-analyzer"
+    "lint": "eslint 'src/**/*.ts' --ignore-path .gitignore --fix && lit-analyzer",
+    "publish": "npm publish"
   },
   "keywords": [
     "nanopublications",

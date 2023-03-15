@@ -1,7 +1,7 @@
 {
   "name": "nanopub-display",
   "private": true,
-  "version": "0.0.11",
+  "version": "0.0.1",
   "description": "A Web Component to display RDF quads data as cytoscape network",
   "author": {
     "name": "Vincent Emonet",
