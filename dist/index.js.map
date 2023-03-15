@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../src/index.ts"],"names":[],"mappings":"AAAA,cAAc,mBAAmB,CAAC;AAClC,cAAc,aAAa,CAAC","sourcesContent":["export * from \"./nanopub-display\";\nexport * from \"./n3-writer\";\n// export * from \"./utils\";\n// export type { JSX } from \"./custom-elements\";\n"]}

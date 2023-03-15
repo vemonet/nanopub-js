@@ -6,7 +6,7 @@ const escape = /["\\\t\n\r\b\f\u0000-\u0019\ud800-\udbff]/, escapeAll = /["\\\t\
     '\n': '\\n',
     '\r': '\\r',
     '\b': '\\b',
-    '\f': '\\f',
+    '\f': '\\f'
 };
 const DEFAULTGRAPH = DataFactory.defaultGraph();
 const aTagAttrs = `target="_blank" rel="noopener noreferrer"`;
@@ -43,11 +43,7 @@ export class NanopubWriter extends Writer {
                     graphLabel = 'provenance';
                 if (graphStr.endsWith('pubinfo'))
                     graphLabel = 'pubinfo';
-                this._write((this._subject === null
-                    ? ''
-                    : this._inDefaultGraph
-                        ? '.<br/>'
-                        : ' .<br/>}</div>') +
+                this._write((this._subject === null ? '' : this._inDefaultGraph ? '.<br/>' : ' .<br/>}</div>') +
                     (DEFAULTGRAPH.equals(graph)
                         ? ''
                         : `<div class="nanopub-graph" id="nanopub-${graphLabel}">${this._encodeIriOrBlank(graph)} {<br/>`));
@@ -92,8 +88,7 @@ export class NanopubWriter extends Writer {
                 prefixList += (prefixList ? '|' : '') + this._prefixIRIs[prefixIRI];
             }
             IRIlist = escapeRegex(IRIlist);
-            this._prefixRegex = new RegExp(`^(?:${prefixList})[^\/]*$|` +
-                `^(${IRIlist})([_a-zA-Z][\\-_a-zA-Z0-9]*)*$`);
+            this._prefixRegex = new RegExp(`^(?:${prefixList})[^\/]*$|` + `^(${IRIlist})([_a-zA-Z][\\-_a-zA-Z0-9]*)*$`);
         }
     }
     end(done) {
@@ -127,9 +122,7 @@ function characterReplacer(character) {
             result = '\\u0000'.substr(0, 6 - result.length) + result;
         }
         else {
-            result = ((character.charCodeAt(0) - 0xd800) * 0x400 +
-                character.charCodeAt(1) +
-                0x2400).toString(16);
+            result = ((character.charCodeAt(0) - 0xd800) * 0x400 + character.charCodeAt(1) + 0x2400).toString(16);
             result = '\\U00000000'.substr(0, 10 - result.length) + result;
         }
     }
