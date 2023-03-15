@@ -13,7 +13,7 @@ const npColor = {
   provenance: css`#f3a08c`,
   pubinfo: css`#ffff66`,
   error: css`#f88b80`,
-  grey: css`#d1d1d1`,
+  grey: css`#d1d1d1`
 };
 
 /**
@@ -207,10 +207,7 @@ export class NanopubDisplay extends LitElement {
     }
 
     if (!this.error && this.url && !this.rdf) {
-      if (
-        this.url.startsWith('https://purl.org/np/') &&
-        !this.url.endsWith('.trig')
-      ) {
+      if (this.url.startsWith('https://purl.org/np/') && !this.url.endsWith('.trig')) {
         this.url = this.url + '.trig';
       }
       try {
@@ -237,7 +234,7 @@ export class NanopubDisplay extends LitElement {
           this.prefixes = {
             this: prefixes['this'],
             sub: prefixes['sub'],
-            ...prefixes,
+            ...prefixes
           };
           writer.addPrefixes(this.prefixes, null);
           // Add the quads to the writer after the prefixes
@@ -270,9 +267,7 @@ export class NanopubDisplay extends LitElement {
    */
   _applyDisplay(displayProp: string) {
     const displayLabel = displayProp.substring(7).toLowerCase();
-    const ele: HTMLElement | null = this.renderRoot.querySelector(
-      `#nanopub-${displayLabel}`
-    );
+    const ele: HTMLElement | null = this.renderRoot.querySelector(`#nanopub-${displayLabel}`);
     if (ele) {
       ele.style.display = this[displayProp] ? 'inherit' : 'none';
     }
@@ -300,8 +295,7 @@ export class NanopubDisplay extends LitElement {
    * Close the display selection dropdown window if click outside of it
    */
   _handleClickOut = (e: any) => {
-    const ele: HTMLElement | null =
-      this.renderRoot.querySelector(`.display-checklist`);
+    const ele: HTMLElement | null = this.renderRoot.querySelector(`.display-checklist`);
     if (window && !ele?.contains(e.originalTarget)) {
       this.showDisplayOptions = false;
       window.removeEventListener('click', this._handleClickOut);
@@ -313,7 +307,7 @@ export class NanopubDisplay extends LitElement {
       <div
         class="nanopub"
         style=${styleMap({
-          'background-color': this.error ? npColor.error.toString() : 'inherit',
+          'background-color': this.error ? npColor.error.toString() : 'inherit'
         })}
       >
         ${when(this.prefixes, () => {
@@ -330,90 +324,62 @@ export class NanopubDisplay extends LitElement {
                     @click="${() => this._openDisplayOptions()}"
                     @touchstart="${() => this._openDisplayOptions()}"
                   >
-                    ${displayIcon}
-                    ${this.showDisplayOptions
-                      ? html`Select the sections to display`
-                      : html``}
+                    ${displayIcon} ${this.showDisplayOptions ? html`Select the sections to display` : html``}
                   </span>
                   ${this.showDisplayOptions
                     ? html`<div class="display-checklist-wrapper">
                         <ul class="items" id="display-checklist-items">
-                          <li
-                            id="displayPrefixes"
-                            @click=${(e: any) =>
-                              this._switchDisplay(e.target.id)}
-                          >
+                          <li id="displayPrefixes" @click=${(e: any) => this._switchDisplay(e.target.id)}>
                             <label
                               ><input
                                 type="checkbox"
                                 value="displayPrefixes"
                                 .checked=${this.displayPrefixes}
-                                @click=${(e: any) =>
-                                  this._switchDisplay(e.target.value)}
+                                @click=${(e: any) => this._switchDisplay(e.target.value)}
                               />
                               Display prefixes
                             </label>
                           </li>
-                          <li
-                            id="displayHead"
-                            @click=${(e: any) =>
-                              this._switchDisplay(e.target.id)}
-                          >
+                          <li id="displayHead" @click=${(e: any) => this._switchDisplay(e.target.id)}>
                             <label
                               ><input
                                 type="checkbox"
                                 value="displayHead"
                                 .checked=${this.displayHead}
-                                @click=${(e: any) =>
-                                  this._switchDisplay(e.target.value)}
+                                @click=${(e: any) => this._switchDisplay(e.target.value)}
                               />
                               Display Head graph
                             </label>
                           </li>
-                          <li
-                            id="displayAssertion"
-                            @click=${(e: any) =>
-                              this._switchDisplay(e.target.id)}
-                          >
+                          <li id="displayAssertion" @click=${(e: any) => this._switchDisplay(e.target.id)}>
                             <label
                               ><input
                                 type="checkbox"
                                 value="displayAssertion"
                                 .checked=${this.displayAssertion}
-                                @click=${(e: any) =>
-                                  this._switchDisplay(e.target.value)}
+                                @click=${(e: any) => this._switchDisplay(e.target.value)}
                               />
                               Display Assertion graph
                             </label>
                           </li>
-                          <li
-                            id="displayProvenance"
-                            @click=${(e: any) =>
-                              this._switchDisplay(e.target.id)}
-                          >
+                          <li id="displayProvenance" @click=${(e: any) => this._switchDisplay(e.target.id)}>
                             <label
                               ><input
                                 type="checkbox"
                                 value="displayProvenance"
                                 .checked=${this.displayProvenance}
-                                @click=${(e: any) =>
-                                  this._switchDisplay(e.target.value)}
+                                @click=${(e: any) => this._switchDisplay(e.target.value)}
                               />
                               Display Provenance graph
                             </label>
                           </li>
-                          <li
-                            id="displayPubinfo"
-                            @click=${(e: any) =>
-                              this._switchDisplay(e.target.id)}
-                          >
+                          <li id="displayPubinfo" @click=${(e: any) => this._switchDisplay(e.target.id)}>
                             <label
                               ><input
                                 type="checkbox"
                                 value="displayPubinfo"
                                 .checked=${this.displayPubinfo}
-                                @click=${(e: any) =>
-                                  this._switchDisplay(e.target.value)}
+                                @click=${(e: any) => this._switchDisplay(e.target.value)}
                               />
                               Display PubInfo graph
                             </label>
@@ -431,10 +397,7 @@ export class NanopubDisplay extends LitElement {
                   return html``;
                 }
                 return html`
-                  @prefix ${prefix} <<a
-                    href="${this.prefixes[prefix]}"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  @prefix ${prefix} <<a href="${this.prefixes[prefix]}" target="_blank" rel="noopener noreferrer"
                     >${this.prefixes[prefix]}</a
                   >> .
                   <br />
@@ -442,22 +405,13 @@ export class NanopubDisplay extends LitElement {
               })}
             </div>`;
         })}
-        ${this.html_rdf
-          ? html`${this.html_rdf}`
-          : this.error
-          ? html`${this.error}`
-          : html`Loading...`}
+        ${this.html_rdf ? html`${this.html_rdf}` : this.error ? html`${this.error}` : html`Loading...`}
       </div>
     `;
   }
 }
 
-const displayIcon = html`<svg
-  xmlns="http://www.w3.org/2000/svg"
-  height="16"
-  width="16"
-  viewBox="0 -80 1000 1000"
->
+const displayIcon = html`<svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 -80 1000 1000">
   <path
     d="M480.118 726Q551 726 600.5 676.382q49.5-49.617 49.5-120.5Q650 485 600.382 435.5q-49.617-49.5-120.5-49.5Q409 386 359.5 435.618q-49.5 49.617-49.5 120.5Q310 627 359.618 676.5q49.617 49.5 120.5 49.5Zm-.353-58Q433 668 400.5 635.265q-32.5-32.736-32.5-79.5Q368 509 400.735 476.5q32.736-32.5 79.5-32.5Q527 444 559.5 476.735q32.5 32.736 32.5 79.5Q592 603 559.265 635.5q-32.736 32.5-79.5 32.5ZM480 856q-146 0-264-83T40 556q58-134 176-217t264-83q146 0 264 83t176 217q-58 134-176 217t-264 83Zm0-300Zm-.169 240Q601 796 702.5 730.5 804 665 857 556q-53-109-154.331-174.5-101.332-65.5-222.5-65.5Q359 316 257.5 381.5 156 447 102 556q54 109 155.331 174.5 101.332 65.5 222.5 65.5Z"
   />

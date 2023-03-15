@@ -6,10 +6,7 @@ import React from 'react';
 
 export declare namespace JSX {
   interface IntrinsicElements {
-    'nanopub-display': React.DetailedHTMLProps<
-      React.HTMLAttributes<HTMLElement>,
-      HTMLElement
-    > & {
+    'nanopub-display': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> & {
       url?: string;
       rdf?: string;
     };

@@ -11,7 +11,7 @@ const escape = /["\\\t\n\r\b\f\u0000-\u0019\ud800-\udbff]/,
     '\n': '\\n',
     '\r': '\\r',
     '\b': '\\b',
-    '\f': '\\f',
+    '\f': '\\f'
   };
 
 const DEFAULTGRAPH = DataFactory.defaultGraph();
@@ -32,11 +32,7 @@ function characterReplacer(character) {
     }
     // Replace a surrogate pair with its 8-bit unicode escape sequence
     else {
-      result = (
-        (character.charCodeAt(0) - 0xd800) * 0x400 +
-        character.charCodeAt(1) +
-        0x2400
-      ).toString(16);
+      result = ((character.charCodeAt(0) - 0xd800) * 0x400 + character.charCodeAt(1) + 0x2400).toString(16);
       result = '\\U00000000'.substr(0, 10 - result.length) + result;
     }
   }
@@ -68,14 +64,12 @@ export class NanopubWriter extends Writer {
     // A blank node or list is represented as-is
     if (entity.termType !== 'NamedNode') {
       // If it is a list head, pretty-print it
-      if (this._lists && entity.value in this._lists)
-        entity = this.list(this._lists[entity.value]);
+      if (this._lists && entity.value in this._lists) entity = this.list(this._lists[entity.value]);
       return 'id' in entity ? entity.id : `_:${entity.value}`;
     }
     let iri = entity.value;
     // Use relative IRIs if requested and possible
-    if (this._baseMatcher && this._baseMatcher.test(iri))
-      iri = iri.substr(this._baseLength);
+    if (this._baseMatcher && this._baseMatcher.test(iri)) iri = iri.substr(this._baseLength);
     // Escape special characters
     if (escape.test(iri)) iri = iri.replace(escapeAll, characterReplacer);
     // Try to represent the IRI as prefixed name
@@ -88,9 +82,7 @@ export class NanopubWriter extends Writer {
       ? `<<a href="${iri}" ${aTagAttrs}>${iri}</a>>`
       : !prefixMatch[1]
       ? iri
-      : `<a href="${iri}"  ${aTagAttrs}>${
-          this._prefixIRIs[prefixMatch[1]] + prefixMatch[2] || ':'
-        }</a>`;
+      : `<a href="${iri}"  ${aTagAttrs}>${this._prefixIRIs[prefixMatch[1]] + prefixMatch[2] || ':'}</a>`;
   }
 
   _writeQuad(subject: any, predicate: any, object: any, graph: any, done: any) {
@@ -102,22 +94,15 @@ export class NanopubWriter extends Writer {
         const graphStr = graph.id.toString().toLowerCase();
         let graphLabel = 'assertion';
         if (graphStr.endsWith('head')) graphLabel = 'head';
-        if (graphStr.endsWith('provenance') || graphStr.endsWith('prov'))
-          graphLabel = 'provenance';
+        if (graphStr.endsWith('provenance') || graphStr.endsWith('prov')) graphLabel = 'provenance';
         if (graphStr.endsWith('pubinfo')) graphLabel = 'pubinfo';
 
         // Close the previous graph and start the new one
         this._write(
-          (this._subject === null
-            ? ''
-            : this._inDefaultGraph
-            ? '.<br/>'
-            : ' .<br/>}</div>') +
+          (this._subject === null ? '' : this._inDefaultGraph ? '.<br/>' : ' .<br/>}</div>') +
             (DEFAULTGRAPH.equals(graph)
               ? ''
-              : `<div class="nanopub-${graphLabel}">${this._encodeIriOrBlank(
-                  graph
-                )} {<br/>`)
+              : `<div class="nanopub-${graphLabel}">${this._encodeIriOrBlank(graph)} {<br/>`)
         );
         this._graph = graph;
         this._subject = null;
@@ -125,8 +110,7 @@ export class NanopubWriter extends Writer {
       // Don't repeat the subject if it's the same
       if (subject.equals(this._subject)) {
         // Don't repeat the predicate if it's the same
-        if (predicate.equals(this._predicate))
-          this._write(`, ${this._encodeObject(object)}`, done);
+        if (predicate.equals(this._predicate)) this._write(`, ${this._encodeObject(object)}`, done);
         // Same subject, different predicate
         else
           this._write(
@@ -143,9 +127,7 @@ export class NanopubWriter extends Writer {
             (this._subject === null ? '' : ' .<br/><br/>') +
             `&nbsp;&nbsp;&nbsp;&nbsp;` +
             this._encodeSubject((this._subject = subject))
-          } ${this._encodePredicate(
-            (this._predicate = predicate)
-          )} ${this._encodeObject(object)}`,
+          } ${this._encodePredicate((this._predicate = predicate))} ${this._encodeObject(object)}`,
           done
         );
     } catch (error) {
@@ -171,9 +153,7 @@ export class NanopubWriter extends Writer {
       }
       // Store and write the prefix
       this._prefixIRIs[iri] = prefix += ':';
-      this._write(
-        `@prefix ${prefix} <<a href="${iri}" ${aTagAttrs}>${iri}</a>> .<br/>`
-      );
+      this._write(`@prefix ${prefix} <<a href="${iri}" ${aTagAttrs}>${iri}</a>> .<br/>`);
     }
     // Recreate the prefix matcher
     if (hasPrefixes) {
@@ -184,10 +164,7 @@ export class NanopubWriter extends Writer {
         prefixList += (prefixList ? '|' : '') + this._prefixIRIs[prefixIRI];
       }
       IRIlist = escapeRegex(IRIlist);
-      this._prefixRegex = new RegExp(
-        `^(?:${prefixList})[^\/]*$|` +
-          `^(${IRIlist})([_a-zA-Z][\\-_a-zA-Z0-9]*)*$`
-      );
+      this._prefixRegex = new RegExp(`^(?:${prefixList})[^\/]*$|` + `^(${IRIlist})([_a-zA-Z][\\-_a-zA-Z0-9]*)*$`);
     }
     // End a prefix block with a newline
     this._write(hasPrefixes ? '' : '', done);

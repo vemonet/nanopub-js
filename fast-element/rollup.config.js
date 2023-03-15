@@ -10,9 +10,9 @@ import nodeBuiltins from 'rollup-plugin-node-builtins';
 const plugins = [
   typescript({
     compilerOptions: {
-      declaration: true,
+      declaration: true
       // declarationDir: "types/",
-    },
+    }
   }),
   commonjs(),
   nodeResolve({preferBuiltins: false}),
@@ -20,8 +20,8 @@ const plugins = [
   // nodeBuiltins(),
   filesize({
     showMinifiedSize: false,
-    showBrotliSize: true,
-  }),
+    showBrotliSize: true
+  })
 ];
 
 export default [
@@ -30,16 +30,16 @@ export default [
     output: [
       {
         file: 'dist/nanopub-display.js',
-        format: 'esm',
+        format: 'esm'
       },
       {
         file: 'dist/nanopub-display.min.js',
         format: 'esm',
-        plugins: [terser()],
-      },
+        plugins: [terser()]
+      }
     ],
-    plugins,
-  },
+    plugins
+  }
   // {
   //     input: './src/custom-elements.d.ts',
   //     output: [

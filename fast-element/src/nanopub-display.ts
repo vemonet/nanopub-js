@@ -1,20 +1,12 @@
-import {
-  attr,
-  html,
-  css,
-  customElement,
-  observable,
-  when,
-  FASTElement,
-} from '@microsoft/fast-element';
+import {attr, html, css, customElement, observable, when, FASTElement} from '@microsoft/fast-element';
 import {Parser, Quad} from 'n3';
 
 import {NanopubWriter} from './n3-writer';
 
 const template = html<NanopubDisplay>`
-  <div>${(x) => x.html_rdf}</div>
+  <div>${x => x.html_rdf}</div>
 
-  ${when((x) => !x.html_rdf, html<NanopubDisplay>` Loading... `)}
+  ${when(x => !x.html_rdf, html<NanopubDisplay>` Loading... `)}
 `;
 
 const styles = css`
@@ -75,7 +67,7 @@ const styles = css`
 @customElement({
   name: 'nanopub-display',
   template,
-  styles,
+  styles
   // shadowOptions: { delegatesFocus: true, mode: 'open' },
 })
 export class NanopubDisplay extends FASTElement {
@@ -110,7 +102,7 @@ export class NanopubDisplay extends FASTElement {
           {
             sub: prefixes['sub'],
             this: prefixes['this'],
-            ...prefixes,
+            ...prefixes
           },
           null
         );

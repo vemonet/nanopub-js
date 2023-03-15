@@ -36,7 +36,7 @@ In HTML:
 In JavaScript:
 
 ```js
-import { NanopubDisplay } from 'https://unpkg.com/@nanopub/display?module';
+import {NanopubDisplay} from 'https://unpkg.com/@nanopub/display?module';
 ```
 
 ### 🚛 Import Bundle

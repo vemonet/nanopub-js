@@ -6,68 +6,45 @@ module.exports = class Docs {
   data() {
     return {
       layout: 'page.11ty.cjs',
-      title: 'nanopub-display ⌲ Docs',
+      title: 'nanopub-display ⌲ Docs'
     };
   }
 
   render(data) {
     const manifest = data['api.11tydata'].customElements;
     const elements = manifest.modules.reduce(
-      (els, module) =>
-        els.concat(
-          module.declarations?.filter((dec) => dec.customElement) ?? []
-        ),
+      (els, module) => els.concat(module.declarations?.filter(dec => dec.customElement) ?? []),
       []
     );
     return `
      <h1>🔌 API</h1>
      ${elements
        .map(
-         (element) => `
+         element => `
        <h2>&lt;${element.tagName}></h2>
        <div>
          ${element.description}
        </div>
-       ${renderTable(
-         'Attributes',
-         ['name', 'description', 'type.text', 'default'],
-         element.attributes
-       )}
+       ${renderTable('Attributes', ['name', 'description', 'type.text', 'default'], element.attributes)}
        ${renderTable(
          'Properties',
          ['name', 'attribute', 'description', 'type.text', 'default'],
-         element.members.filter((m) => m.kind === 'field')
+         element.members.filter(m => m.kind === 'field')
        )}
        ${renderTable(
          'Methods',
          ['name', 'parameters', 'description', 'return.type.text'],
          element.members
-           .filter((m) => m.kind === 'method' && m.privacy !== 'private')
-           .map((m) => ({
+           .filter(m => m.kind === 'method' && m.privacy !== 'private')
+           .map(m => ({
              ...m,
-             parameters: renderTable(
-               '',
-               ['name', 'description', 'type.text'],
-               m.parameters
-             ),
+             parameters: renderTable('', ['name', 'description', 'type.text'], m.parameters)
            }))
        )}
        ${renderTable('Events', ['name', 'description'], element.events)}
-       ${renderTable(
-         'Slots',
-         [['name', '(default)'], 'description'],
-         element.slots
-       )}
-       ${renderTable(
-         'CSS Shadow Parts',
-         ['name', 'description'],
-         element.cssParts
-       )}
-       ${renderTable(
-         'CSS Custom Properties',
-         ['name', 'description'],
-         element.cssProperties
-       )}
+       ${renderTable('Slots', [['name', '(default)'], 'description'], element.slots)}
+       ${renderTable('CSS Shadow Parts', ['name', 'description'], element.cssParts)}
+       ${renderTable('CSS Custom Properties', ['name', 'description'], element.cssProperties)}
        `
        )
        .join('')}
@@ -102,20 +79,13 @@ const renderTable = (name, properties, data) => {
    ${name ? `<h3>${name}</h3>` : ''}
    <table>
      <tr>
-       ${properties
-         .map(
-           (p) =>
-             `<th>${capitalize(
-               (Array.isArray(p) ? p[0] : p).split('.')[0]
-             )}</th>`
-         )
-         .join('')}
+       ${properties.map(p => `<th>${capitalize((Array.isArray(p) ? p[0] : p).split('.')[0])}</th>`).join('')}
      </tr>
      ${data
        .map(
-         (i) => `
+         i => `
        <tr>
-         ${properties.map((p) => `<td>${get(i, p)}</td>`).join('')}
+         ${properties.map(p => `<td>${get(i, p)}</td>`).join('')}
        </tr>
      `
        )
@@ -124,4 +94,4 @@ const renderTable = (name, properties, data) => {
  `;
 };
 
-const capitalize = (s) => s[0].toUpperCase() + s.substring(1);
+const capitalize = s => s[0].toUpperCase() + s.substring(1);

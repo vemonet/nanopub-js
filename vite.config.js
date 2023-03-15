@@ -16,7 +16,7 @@ export default defineConfig({
     lib: {
       entry: 'src/nanopub-display.ts',
       name: 'nanopub-rdf',
-      dir: 'dist',
+      dir: 'dist'
       // formats: ["esm"],
       // fileName: (format) => `nanopub-rdf.${format}.js`,
     },
@@ -29,7 +29,7 @@ export default defineConfig({
       output: [
         {
           entryFileNames: '[name].js',
-          format: 'esm',
+          format: 'esm'
         },
         {
           entryFileNames: '[name].min.js',
@@ -38,24 +38,24 @@ export default defineConfig({
             terser({
               ecma: 2020,
               module: true,
-              warnings: true,
+              warnings: true
             })
-          ],
-        },
+          ]
+        }
       ],
       rollupPlugins,
       // No external for testing, everything needs to be bundled
       // eslint-disable-next-line no-undef
-      external: process.env.BUNDLE ? [] : [/^lit/, /^n3/],
-    },
+      external: process.env.BUNDLE ? [] : [/^lit/, /^n3/]
+    }
   },
   optimizeDeps: {
-    include: ['lit', 'n3'],
+    include: ['lit', 'n3']
   },
   plugins: [
-      dts(),
-      // ViteMinifyPlugin({}),
-  ],
+    dts()
+    // ViteMinifyPlugin({}),
+  ]
   // define: {
   //     global: {},
   // },
@@ -71,5 +71,5 @@ const rollupPlugins = [
   //   }
   // }),
   commonjs(),
-  nodeResolve({preferBuiltins: true, browser: true}),
+  nodeResolve({preferBuiltins: true, browser: true})
 ];

@@ -14,17 +14,17 @@ import nodeGlobals from 'rollup-plugin-node-globals';
 const plugins = [
   typescript({
     compilerOptions: {
-      declaration: true,
+      declaration: true
       // declarationDir: "types/",
-    },
+    }
   }),
   // TODO: resolves imports, but fail due to N3.js https://github.com/rdfjs/N3.js/issues/257
   // nodeGlobals(),
   // nodeResolve(),
   filesize({
     showMinifiedSize: false,
-    showBrotliSize: true,
-  }),
+    showBrotliSize: true
+  })
 ];
 
 // https://vitejs.dev/config/
@@ -33,7 +33,7 @@ export default defineConfig({
     target: ['esnext'],
     lib: {
       entry: 'src/index.ts',
-      name: 'nanopub-rdf',
+      name: 'nanopub-rdf'
       // fileName: (format) => `nanopub-rdf.${format}.js`,
       // dir: "dist",
       // formats: ["es"],
@@ -47,16 +47,16 @@ export default defineConfig({
         {
           file: 'dist/nanopub-display.js',
           // dir: "dist",
-          format: 'esm',
+          format: 'esm'
         },
         {
           file: 'dist/nanopub-display.min.js',
           // dir: "dist",
           format: 'esm',
-          plugins: [terser()],
-        },
+          plugins: [terser()]
+        }
       ],
-      plugins,
+      plugins
       // external: /^@microsoft\/fast-(element|components)/
       // external: /^@microsoft\/fast-element/,
       // Added from rollup.config.js
@@ -75,23 +75,17 @@ export default defineConfig({
       //     },
       // ],
       // plugins,
-    },
+    }
   },
   optimizeDeps: {
-    include: [
-      '@microsoft/fast-element',
-      'n3',
-      'cytoscape',
-      'cytoscape-popper',
-      'cytoscape-cose-bilkent',
-    ],
+    include: ['@microsoft/fast-element', 'n3', 'cytoscape', 'cytoscape-popper', 'cytoscape-cose-bilkent']
   },
   plugins: [
-    dts(),
+    dts()
     // terser(),
     // input https://www.npmjs.com/package/html-minifier-terser options
     // ViteMinifyPlugin({}),
-  ],
+  ]
   // define: {
   //     global: {},
   // },

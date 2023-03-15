@@ -11,7 +11,7 @@ export default {
   output: [
     {
       file: 'dist/nanopub-display.js',
-      format: 'esm',
+      format: 'esm'
     },
     {
       file: 'dist/nanopub-display.min.js',
@@ -21,27 +21,27 @@ export default {
         terser({
           ecma: 2020,
           module: true,
-          warnings: true,
-        }),
-      ],
-    },
+          warnings: true
+        })
+      ]
+    }
   ],
   // No external for testing, everything needs to be bundled
   external: process.env.BUNDLE ? [] : [/^lit/, /^n3/],
   plugins: [
     replace({
       preventAssignment: true,
-      'Reflect.decorate': 'undefined',
+      'Reflect.decorate': 'undefined'
     }),
     commonjs(), // https://github.com/rollup/plugins/tree/master/packages/commonjs
     // Resolve bare module specifiers to relative paths
     resolve({preferBuiltins: true, browser: true}),
     // minifyHTML(), // Minify HTML template literals
-    summary(),
+    summary()
   ],
   onwarn(warning) {
     if (warning.code !== 'THIS_IS_UNDEFINED') {
       console.error(`(!) ${warning.message}`);
     }
-  },
+  }
 };

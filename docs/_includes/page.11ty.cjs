@@ -8,9 +8,10 @@ const relative = require('./relative-path.cjs');
 
 // <link href="${relative(page.url, '/prism-solarizeddark.css')}" rel="stylesheet" />
 
-
-{/* <script src="/node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
-<script src="/node_modules/lit/polyfill-support.js"></script> */}
+{
+  /* <script src="/node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+<script src="/node_modules/lit/polyfill-support.js"></script> */
+}
 module.exports = function (data) {
   const {title, page, content} = data;
   return `
@@ -27,10 +28,7 @@ module.exports = function (data) {
 
     <link href="${relative(page.url, '/prism-solarizeddark.css')}" rel="stylesheet" />
 
-    <script type="module" src="${relative(
-      page.url,
-      '/dist/nanopub-display.js'
-    )}"></script>
+    <script type="module" src="${relative(page.url, '/dist/nanopub-display.js')}"></script>
   </head>
   <body>
     ${header()}

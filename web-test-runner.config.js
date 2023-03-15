@@ -49,7 +49,7 @@ const browsers = {
   // Local browser testing via playwright
   // ===========
   chromium: playwrightLauncher({product: 'chromium'}),
-  firefox: playwrightLauncher({product: 'firefox'}),
+  firefox: playwrightLauncher({product: 'firefox'})
   // TODO: missing dependencies for linux: libpcre.so.3 libicui18n.so.66 libicuuc.so.66 libjpeg.so.8 libwebp.so.6 libflite.so.1 libflite_usenglish.so.1 libflite_cmulex.so.1  libflite_cmu_us_awb.so.1 libflite_cmu_us_kal.so.1 libflite_cmu_us_rms.so.1 libflite_cmu_us_slt.so.1 libffi.so.7 libx264.so
   // webkit: playwrightLauncher({product: 'webkit'}),
 
@@ -72,14 +72,12 @@ const browsers = {
 
 // Prepend BROWSERS=x,y to `npm run test` to run a subset of browsers
 // e.g. `BROWSERS=chromium,firefox npm run test`
-const noBrowser = (b) => {
+const noBrowser = b => {
   throw new Error(`No browser configured named '${b}'; using defaults`);
 };
 let commandLineBrowsers;
 try {
-  commandLineBrowsers = process.env.BROWSERS?.split(',').map(
-    (b) => browsers[b] ?? noBrowser(b)
-  );
+  commandLineBrowsers = process.env.BROWSERS?.split(',').map(b => browsers[b] ?? noBrowser(b));
 } catch (e) {
   console.warn(e);
 }
@@ -98,11 +96,11 @@ export default {
     // https://mochajs.org/api/mocha
     config: {
       ui: 'tdd',
-      timeout: '60000',
-    },
+      timeout: '60000'
+    }
   },
   plugins: [
-    esbuildPlugin({ts: true, target: 'es2020', sourceMap: true}),
+    esbuildPlugin({ts: true, target: 'es2020', sourceMap: true})
     // Detect browsers without modules (e.g. IE11) and transform to SystemJS
     // (https://modern-web.dev/docs/dev-server/plugins/legacy/).
     // legacyPlugin({
@@ -120,5 +118,5 @@ export default {
     //     ],
     //   },
     // }),
-  ],
+  ]
 };

@@ -7,7 +7,7 @@ const relative = require('./relative-path.cjs');
 module.exports = function (data) {
   return page({
     ...data,
-    content: renderExample(data),
+    content: renderExample(data)
   });
 };
 
@@ -22,12 +22,9 @@ const renderExample = ({name, content, collections, page}) => {
               ? ''
               : collections.example
                   .map(
-                    (post) => `
+                    post => `
                   <li class=${post.url === page.url ? 'selected' : ''}>
-                    <a href="${relative(
-                      page.url,
-                      post.url
-                    )}">${post.data.description.replace('<', '&lt;')}</a>
+                    <a href="${relative(page.url, post.url)}">${post.data.description.replace('<', '&lt;')}</a>
                   </li>
                 `
                   )

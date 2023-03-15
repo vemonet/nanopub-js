@@ -24,9 +24,7 @@ It enables developers and users to control which graphs from the nanopublication
 
   <body>
     <div style="min-height: 100vh; width: 100%;">
-      <nanopub-display
-        url="https://purl.org/np/RAHtkscyyyJDLvWRuINckQrn5rbHzQKvwakNVC3fmRzGU"
-      />
+      <nanopub-display url="https://purl.org/np/RAHtkscyyyJDLvWRuINckQrn5rbHzQKvwakNVC3fmRzGU" />
     </div>
   </body>
 </html>

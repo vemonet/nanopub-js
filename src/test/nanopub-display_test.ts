@@ -11,9 +11,7 @@ suite('nanopub-display', () => {
 
   test('render and check loading with a nanopub URL', async () => {
     const el = await fixture(
-      html`<nanopub-display
-        url="https://purl.org/np/RAHtkscyyyJDLvWRuINckQrn5rbHzQKvwakNVC3fmRzGU"
-      />`
+      html`<nanopub-display url="https://purl.org/np/RAHtkscyyyJDLvWRuINckQrn5rbHzQKvwakNVC3fmRzGU" />`
     );
     console.log(assert.shadowDom);
     assert.shadowDom.equal(
