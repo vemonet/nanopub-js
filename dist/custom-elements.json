@@ -12,7 +12,7 @@
           "name": "*",
           "declaration": {
             "name": "*",
-            "package": "\"./nanopub-display\""
+            "package": "./nanopub-display"
           }
         },
         {
@@ -20,7 +20,7 @@
           "name": "*",
           "declaration": {
             "name": "*",
-            "package": "\"./n3-writer\""
+            "package": "./n3-writer"
           }
         }
       ]
