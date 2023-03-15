@@ -5,7 +5,6 @@ import commonjs from '@rollup/plugin-commonjs';
 import {terser} from 'rollup-plugin-terser';
 // import minifyHTML from 'rollup-plugin-minify-html-literals';
 
-
 const rollupConf = {
   input: 'dist/index.js',
   plugins: [
@@ -26,21 +25,21 @@ const rollupConf = {
       console.error(`(!) ${warning.message}`);
     }
   }
-}
+};
 
 // https://lit.dev/docs/tools/production/
-// 2 outputs: a normal with external dependencies, a min.js with all dependencies packaged
+// 3 outputs: a normal with external dependencies, one with all dependencies bundled, and one bundled and minified
 export default [
   {
     ...rollupConf,
     output: [
       {
         file: 'dist/nanopub-display.js',
-        format: 'esm',
-      },
+        format: 'esm'
+      }
     ],
     // No external for testing, everything needs to be bundled
-    external: process.env.BUNDLE ? [] : [/^lit/, /^n3/],
+    external: process.env.BUNDLE ? [] : [/^lit/, /^n3/]
   },
   {
     ...rollupConf,
@@ -49,7 +48,7 @@ export default [
     output: [
       {
         file: 'dist/nanopub-display.bundle.js',
-        format: 'esm',
+        format: 'esm'
       },
       {
         file: 'dist/nanopub-display.min.js',
@@ -65,6 +64,6 @@ export default [
           })
         ]
       }
-    ],
-  },
-]
+    ]
+  }
+];

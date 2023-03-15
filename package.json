@@ -36,7 +36,7 @@
     "test:prod": "yarn test && MODE=prod wtr",
     "test:all": "yarn test:dev && yarn test:prod",
     "fmt": "prettier \"**/*.{cjs,html,js,json,md,ts}\" --ignore-path .gitignore --write",
-    "lint": "lit-analyzer && eslint 'src/**/*.ts' --ignore-path .gitignore --fix"
+    "lint": "eslint 'src/**/*.ts' --ignore-path .gitignore --fix && lit-analyzer"
   },
   "keywords": [
     "nanopublications",
@@ -128,6 +128,25 @@
         }
       ]
     },
+    "overrides": [
+      {
+        "files": ["rollup.config.js", "web-test-runner.config.js"],
+        "env": {
+          "node": true
+        }
+      },
+      {
+        "files": [
+          "*_test.ts",
+          "**/custom_typings/*.ts",
+          "packages/labs/ssr/src/test/integration/tests/**",
+          "packages/labs/ssr/src/lib/util/parse5-utils.ts"
+        ],
+        "rules": {
+          "@typescript-eslint/no-explicit-any": "off"
+        }
+      }
+    ],
     "ignorePatterns": [
       "*.lock",
       "node_modules/*",
