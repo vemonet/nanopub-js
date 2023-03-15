@@ -736,14 +736,6 @@
             "name": "NanopubDisplay",
             "module": "src/nanopub-display.ts"
           }
-        },
-        {
-          "kind": "js",
-          "name": "JSX",
-          "declaration": {
-            "name": "LocalJSX",
-            "module": "src/nanopub-display.ts"
-          }
         }
       ]
     },

@@ -28,7 +28,7 @@ declare global {
         'nanopub-display': NanopubDisplay;
     }
 }
-declare namespace LocalJSX {
+export declare namespace JSX {
     interface NanopubDisplay {
         url?: string;
         rdf?: string;
@@ -37,5 +37,4 @@ declare namespace LocalJSX {
         'nanopub-display': NanopubDisplay;
     }
 }
-export { LocalJSX as JSX };
 //# sourceMappingURL=nanopub-display.d.ts.map
