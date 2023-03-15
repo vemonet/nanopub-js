@@ -58,12 +58,3 @@ render(
   document.body
 );
 ```
-
-  </div>
-  <div>
-
-<h4>This is a &lt;nanopub-display&gt;</h4>
-<nanopub-display url="https://purl.org/np/RAHtkscyyyJDLvWRuINckQrn5rbHzQKvwakNVC3fmRzGU"></nanopub-display>
-
-  </div>
-</section>
