@@ -1,6 +1,6 @@
 {
   "name": "@nanopub/display",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A web component to display Nanopublications",
   "author": {
     "name": "Vincent Emonet",
@@ -118,6 +118,7 @@
       "no-prototype-builtins": "off",
       "no-useless-escape": "off",
       "no-control-regex": "off",
+      "lit/no-invalid-html": "off",
       "@typescript-eslint/ban-types": "off",
       "@typescript-eslint/explicit-function-return-type": "off",
       "@typescript-eslint/explicit-module-boundary-types": "off",
