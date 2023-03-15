@@ -435,7 +435,7 @@ declare global {
 //   }
 // }
 
-declare namespace LocalJSX {
+export declare namespace JSX {
   interface NanopubDisplay {
     /**
      * The URL
@@ -450,7 +450,7 @@ declare namespace LocalJSX {
     'nanopub-display': NanopubDisplay;
   }
 }
-export {LocalJSX as JSX};
+// export {LocalJSX as JSX};
 
 // declare module "@stencil/core" {
 //   export namespace JSX {
