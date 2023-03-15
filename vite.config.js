@@ -1,11 +1,12 @@
 import {defineConfig} from 'vite';
 import {terser} from 'rollup-plugin-terser';
-import typescript from '@rollup/plugin-typescript';
 import {nodeResolve} from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
-// import dts from 'vite-plugin-dts';
+import dts from 'vite-plugin-dts';
+import typescript from '@rollup/plugin-typescript';
 
 // NOTE: vite build not used, we use rollup directly
+// https://www.npmjs.com/package/@rollup/plugin-typescript
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -15,45 +16,46 @@ export default defineConfig({
     lib: {
       entry: 'src/nanopub-display.ts',
       name: 'nanopub-rdf',
-      // fileName: (format) => `nanopub-rdf.${format}.js`,
       dir: 'dist',
-      // formats: ["es"],
+      // formats: ["esm"],
+      // fileName: (format) => `nanopub-rdf.${format}.js`,
     },
     minify: true,
     sourcemap: true,
     cssCodeSplit: true,
-    // commonjsOptions: {
-    //     include: [/node_modules/, /n3/],
-    //     extensions: ['.js', '.cjs']
-    // },
+
     rollupOptions: {
       input: 'src/nanopub-display.ts',
       output: [
         {
-          // file: "dist/nanopub-display.js",
-          // dir: "dist",
           entryFileNames: '[name].js',
           format: 'esm',
         },
         {
-          // file: "dist/nanopub-display.min.js",
-          // dir: "dist",
           entryFileNames: '[name].min.js',
           format: 'esm',
-          plugins: [terser()],
+          plugins: [
+            terser({
+              ecma: 2020,
+              module: true,
+              warnings: true,
+            })
+          ],
         },
       ],
       rollupPlugins,
-      // external: [/lit/, /n3/]
+      // No external for testing, everything needs to be bundled
+      // eslint-disable-next-line no-undef
+      external: process.env.BUNDLE ? [] : [/^lit/, /^n3/],
     },
   },
   optimizeDeps: {
     include: ['lit', 'n3'],
   },
-  // plugins: [
-  //     // dts(),
-  //     // ViteMinifyPlugin({}),
-  // ],
+  plugins: [
+      dts(),
+      // ViteMinifyPlugin({}),
+  ],
   // define: {
   //     global: {},
   // },
@@ -61,17 +63,16 @@ export default defineConfig({
 
 const rollupPlugins = [
   typescript({
-    compilerOptions: {
-      target: 'esnext',
-      declaration: true,
-      module: 'CommonJS',
-      // declarationDir: "types/",
-    },
+    "compilerOptions": {
+      "outDir": "dist",
+      "declaration": true,
+      "declarationDir": "."
+    }
   }),
   // nodeGlobals(),
   commonjs({
-    extensions: ['.js', '.ts'],
+    // extensions: ['.js', '.ts'],
     // include: [/n3/],
   }),
-  nodeResolve(),
+  nodeResolve({preferBuiltins: true, browser: true}),
 ];

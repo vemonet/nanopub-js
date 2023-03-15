@@ -1,5 +1,5 @@
 {
-  "name": "nanopub-display",
+  "name": "@nanopub/display",
   "private": true,
   "version": "0.0.1",
   "description": "A web component to display Nanopublications",
@@ -21,12 +21,12 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "rimraf dist && tsc && rollup -c && rollup -c rollup.min.config.js",
+    "build": "vite build",
+    "build:rollup": "rimraf dist && tsc && rollup -c && rollup -c rollup.min.config.js",
     "build:watch": "tsc --watch",
-    "build:vite": "vite build",
     "docs": "yarn docs:prebuild && yarn docs:serve",
     "docs:build": "yarn docs:prebuild && eleventy",
-    "docs:prebuild": "rimraf docs-dist && tsc && yarn docs:analyze && BUNDLE=true rollup -c",
+    "docs:prebuild": "rimraf docs-dist && BUNDLE=true yarn build && yarn docs:analyze",
     "docs:serve": "eleventy --serve",
     "docs:analyze": "cem analyze --litelement --globs \"src/**/*.ts\" --outdir dist",
     "docs:ghpages": "eleventy --pathprefix=/nanopub-display/",
@@ -46,7 +46,6 @@
   ],
   "dependencies": {
     "lit": "^2.2.4",
-    "lit-html": "^2.6.1",
     "n3": "^1.16.3"
   },
   "devDependencies": {
@@ -76,7 +75,8 @@
     "rollup-plugin-summary": "^1.4.3",
     "rollup-plugin-terser": "^7.0.2",
     "typescript": "^4.9.5",
-    "vite": "^4.1.4"
+    "vite": "^4.1.4",
+    "vite-plugin-dts": "^2.1.0"
   },
   "prettier": {
     "trailingComma": "es5",

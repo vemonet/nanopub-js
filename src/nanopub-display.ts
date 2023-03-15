@@ -1,7 +1,7 @@
 import {LitElement, html, css} from 'lit';
 import {customElement, property, state} from 'lit/decorators.js';
 import {when} from 'lit/directives/when.js';
-import {unsafeHTML} from 'lit-html/directives/unsafe-html.js';
+import {unsafeHTML} from 'lit/directives/unsafe-html.js';
 import {styleMap} from 'lit/directives/style-map.js';
 
 import {Parser, Quad} from 'n3';

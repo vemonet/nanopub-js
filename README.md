@@ -96,3 +96,5 @@ yarn docs:build
 Vite TS starter: https://github.com/vitejs/vite/tree/main/packages/create-vite/template-lit-ts
 
 Official lit TS starter: https://github.com/lit/lit-element-starter-ts
+
+https://github.com/zazuko/rdfjs-elements

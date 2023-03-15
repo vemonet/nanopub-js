@@ -12,11 +12,11 @@ title: nanopub-display ⌲ Install
 The most convenient way to install a package in your project, using either `npm` or `yarn`:
 
 ```bash
-npm i --save nanopub-display
+npm i --save @nanopub/display
 ```
 
 ```bash
-yarn add nanopub-display
+yarn add @nanopub/display
 ```
 
 ## 🌐 Import from a CDN
@@ -30,13 +30,13 @@ For this element to work from unpkg.com specifically, you need to include the `?
 In HTML:
 
 ```html
-<script type="module" src="https://unpkg.com/nanopub-display?module"></script>
+<script type="module" src="https://unpkg.com/@nanopub/display?module"></script>
 ```
 
 In JavaScript:
 
 ```js
-import { NanopubDisplay } from 'https://unpkg.com/nanopub-display?module';
+import { NanopubDisplay } from 'https://unpkg.com/@nanopub/display?module';
 ```
 
 ### 🚛 Import Bundle
@@ -46,11 +46,11 @@ We also distribute Nanopub Display as a minified bundle with all dependencies pr
 Import the latest version:
 
 ```html
-<script type="module" src="https://cdn.jsdelivr.net/npm/nanopub-display/dist/nanopub-display.min.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@nanopub/display/dist/nanopub-display.min.js"></script>
 ```
 
 In production we recommend to use a specific version:
 
 ```html
-<script type="module" src="https://cdn.jsdelivr.net/npm/nanopub-display@0.0.1/dist/nanopub-display.min.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@nanopub/display@0.0.1/dist/nanopub-display.min.js"></script>
 ```
