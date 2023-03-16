@@ -54,36 +54,8 @@
         {
           "title": "Contributing",
           "source": "CONTRIBUTING.md"
-          // "moduleRoot": true,
-          // "children": [
-          //   {"title": "Contribute", "source": "CONTRIBUTING.md"},
-            // {
-            //   "title": "Configuration",
-            //   "childrenDir": "configuration",
-            //   "children": [
-            //     {"title": "Configuration file", "source": "file.md"},
-            //     {"title": "CLI options", "source": "cli.md"}
-            //   ]
-            // }
-          // ]
         }
       ]
-    },
-
-    // "theme": "pages-plugin",
-    // "pages": {
-    //   "groups": [
-    //     {
-    //       "title": "Development",
-    //       "pages": [
-    //         {
-    //           "title": "Contribute",
-    //           "source": "./CONTRIBUTING.md"
-    //         }
-    //       ]
-    //     }
-    //   ],
-    //   "output": "pages"
-    // }
+    }
   }
 }

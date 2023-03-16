@@ -89,7 +89,6 @@ cy.on('tap', "node", (e: any) => cytoscapeHighlightConnectedEdges(e, cy))
 cy.on('tap', 'node', cytoscapeShowNodeOnClick);
 ```
 
-
 # 📥️ Install
 
 `<nanopub-display>` is distributed on npm, so you can install it in your project, or use it via npm CDNs like [unpkg.com](https://unpkg.com).

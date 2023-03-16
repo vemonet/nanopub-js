@@ -2,7 +2,6 @@
 
 This document contains details on the workflow used to develop the component if you want to improve it, and contribute.
 
-
 ## 📥️ Install for development
 
 Clone the repository:
