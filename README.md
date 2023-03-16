@@ -27,8 +27,6 @@ If you want to improve this library, please refer to the [contribute page](/page
 
 > `<nanopub-display>` enables developers and users to control which graphs from the nanopublication are displayed.
 
-<script type="module" src="https://cdn.jsdelivr.net/npm/@nanopub/display/dist/nanopub-display.bundle.js"></script>
-
 <div>
   <nanopub-status url="https://purl.org/np/RAHtkscyyyJDLvWRuINckQrn5rbHzQKvwakNVC3fmRzGU" />
 </div>

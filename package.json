@@ -1,6 +1,6 @@
 {
   "name": "@nanopub/display",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "A web component to display Nanopublications",
   "author": {
     "name": "Vincent Emonet",
@@ -12,6 +12,7 @@
   "main": "dist/nanopub-display.js",
   "module": "dist/nanopub-display.js",
   "unpkg": "dist/nanopub-display.min.js",
+  "jsdelivr": "dist/nanopub-display.min.js",
   "types": "dist/index.d.ts",
   "customElements": "dist/custom-elements.json",
   "exports": {
