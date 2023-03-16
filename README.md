@@ -66,7 +66,7 @@ yarn add cytoscape cytoscape-cose-bilkent cytoscape-popper
 The code below shows how to easily generate the cytoscape configuration, please refer to the [cytoscape documentation](https://js.cytoscape.org/#getting-started) to see how to setup your cytoscape container.
 
 ```ts
-import {cytoscapeGetConfig, cytoscapeShowNodeOnClick, cytoscapeHighlightConnectedEdges} from '@nanopub/display';
+import {cyGetConfig, cyShowNodeOnClick, cyHighlightConnectedEdges} from '@nanopub/display';
 import cytoscape, { Core } from 'cytoscape';
 import popper from 'cytoscape-popper';
 import COSEBilkent from 'cytoscape-cose-bilkent';
@@ -76,7 +76,7 @@ const cyContainer?: HTMLDivElement;
 const nanopubTrigRdfString?: string;
 
 // Generate the cytoscape config for a given nanopub RDF
-const cytoscapeConfig = getCytoscapeConfig(nanopubTrigRdfString),
+const cytoscapeConfig = cyGetConfig(nanopubTrigRdfString),
 
 // Provide the generated config and cytoscape container to the cytoscape builder
 const cy = cytoscape({

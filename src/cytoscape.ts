@@ -1,10 +1,10 @@
 import {Parser} from 'n3';
 
-export const cytoscapeGetConfig = (rdf: string) => {
+export const cyGetConfig = (rdf: string) => {
   return {
-    style: defaultCytoscapeStyle,
-    elements: nanopubToCytoscapeElems(rdf),
-    layout: layoutsConfig['cose-bilkent'],
+    style: cyStyle,
+    elements: cyGetElemsForNanopub(rdf),
+    layout: cyLayouts['cose-bilkent'],
     boxSelectionEnabled: true,
     autounselectify: true,
     autoungrabify: false,
@@ -13,9 +13,10 @@ export const cytoscapeGetConfig = (rdf: string) => {
   };
 };
 
-export const nanopubToCytoscapeElems = async (rdf: string) => {
+// cyGetElemsForNanopub
+export const cyGetElemsForNanopub = async (rdf: string) => {
   const parser = new Parser({format: 'application/trig'});
-  const cytoscapeElems: any = [];
+  const cyElems: any = [];
   const graphs: any = {};
 
   parser.parse(rdf, (error: any, quad: any, prefixes: any): any => {
@@ -26,7 +27,7 @@ export const nanopubToCytoscapeElems = async (rdf: string) => {
     if (quad && quad.subject.value && quad.object.value) {
       // console.log("quad", quad.object.termType)
       // Subject and Object nodes
-      cytoscapeElems.push({
+      cyElems.push({
         data: {
           id: quad.subject.value,
           label: quad.subject.value,
@@ -46,7 +47,7 @@ export const nanopubToCytoscapeElems = async (rdf: string) => {
         !quad.object.value.includes(' ') && quad.object.value.length > 100
           ? quad.object.value.replace(/(.{60})/g, '$1\n')
           : quad.object.value;
-      cytoscapeElems.push({
+      cyElems.push({
         data: {
           id: quad.object.value,
           label: cutLongObject,
@@ -61,7 +62,7 @@ export const nanopubToCytoscapeElems = async (rdf: string) => {
         }
       });
       // Add Predicate edge to cytoscape graph
-      cytoscapeElems.push({
+      cyElems.push({
         data: {
           source: quad.subject.value,
           target: quad.object.value,
@@ -91,7 +92,7 @@ export const nanopubToCytoscapeElems = async (rdf: string) => {
           graphTextColor = '#f57f17';
         }
         // Add Graph node at start of cytoscape graph
-        cytoscapeElems.unshift({
+        cyElems.unshift({
           data: {
             // id: 'graph-' + g,
             id: g,
@@ -108,15 +109,15 @@ export const nanopubToCytoscapeElems = async (rdf: string) => {
 
       const allPrefixes = {...prefixes, rdf: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#'};
       // Resolve prefixes
-      cytoscapeElems.map((elem: any) => {
+      cyElems.map((elem: any) => {
         if (elem.data.label) {
           elem.data.label = replacePrefix(elem.data.label, allPrefixes);
         }
       });
     }
   });
-  // console.log('cytoscapeElems:', cytoscapeElems)
-  return cytoscapeElems;
+  // console.log('cyElems:', cyElems)
+  return cyElems;
 };
 
 export const replacePrefix = (uri: string, prefixes: any) => {
@@ -140,7 +141,7 @@ export const displayLink = (urlString: string) => {
   }
 };
 
-export const cytoscapeHighlightConnectedEdges = (e: any, cy: any) => {
+export const cyHighlightConnectedEdges = (e: any, cy: any) => {
   cy?.edges().style({
     'line-color': '#263238',
     color: '#263238',
@@ -158,7 +159,7 @@ export const cytoscapeHighlightConnectedEdges = (e: any, cy: any) => {
   });
 };
 
-export const cytoscapeShowNodeOnClick = (e: any) => {
+export const cyShowNodeOnClick = (e: any) => {
   const ele = e.target;
   ele.popper({
     content: () => {
@@ -194,7 +195,7 @@ const handleClickOut = (e: any) => {
   }
 };
 
-export const defaultCytoscapeStyle = [
+export const cyStyle = [
   {
     selector: 'edge',
     style: {
@@ -259,8 +260,7 @@ export const defaultCytoscapeStyle = [
 ];
 
 // Change Cytoscape layout: https://js.cytoscape.org/#layouts
-// Layout options for dagre:
-export const layoutsConfig = {
+export const cyLayouts = {
   'cose-bilkent': {
     name: 'cose-bilkent',
     // Called on `layoutready`
