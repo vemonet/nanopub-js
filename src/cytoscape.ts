@@ -1,6 +1,5 @@
 import {Parser} from 'n3';
 
-
 export const cytoscapeGetConfig = (rdf: string) => {
   return {
     style: defaultCytoscapeStyle,
@@ -10,10 +9,9 @@ export const cytoscapeGetConfig = (rdf: string) => {
     autounselectify: true,
     autoungrabify: false,
     wheelSensitivity: 0.1,
-    showOverlay: true,
+    showOverlay: true
   };
-}
-
+};
 
 export const nanopubToCytoscapeElems = async (rdf: string) => {
   const parser = new Parser({format: 'application/trig'});
@@ -142,21 +140,23 @@ export const displayLink = (urlString: string) => {
   }
 };
 
-
 export const cytoscapeHighlightConnectedEdges = (e: any, cy: any) => {
   cy?.edges().style({
-    'line-color': '#263238', 'color': '#263238',
-    'width': 2, 'target-arrow-color': '#263238',
+    'line-color': '#263238',
+    color: '#263238',
+    width: 2,
+    'target-arrow-color': '#263238',
     'font-size': '30px'
   }); // Grey
   const ele = e.target;
   ele.connectedEdges().style({
-    'line-color': '#c62828', 'color': '#c62828', // red
-    'width': 4, 'target-arrow-color': '#c62828',
-    'font-size': '40px',
+    'line-color': '#c62828',
+    color: '#c62828', // red
+    width: 4,
+    'target-arrow-color': '#c62828',
+    'font-size': '40px'
   });
-}
-
+};
 
 export const cytoscapeShowNodeOnClick = (e: any) => {
   const ele = e.target;
@@ -193,7 +193,6 @@ const handleClickOut = (e: any) => {
     popEle?.remove();
   }
 };
-
 
 export const defaultCytoscapeStyle = [
   {
@@ -258,7 +257,6 @@ export const defaultCytoscapeStyle = [
     }
   }
 ];
-
 
 // Change Cytoscape layout: https://js.cytoscape.org/#layouts
 // Layout options for dagre:

@@ -1,100 +1,163 @@
-# 🧬 Web Component to display Nanopublications
+# 🧬 Web Components to display Nanopublications
 
-[![Run tests and update docs](https://github.com/vemonet/nanopub-display/actions/workflows/build.yml/badge.svg)](https://github.com/vemonet/nanopub-display/actions/workflows/build.yml)
+`@nanopub/display` is a library of standard web components to easily display [Nanopublications](https://nanopub.net) in applications built using any web framework (pure HTML, React, Angular, Vue, Svelte).
 
-A standard Web Component to display [Nanopublications](https://nanopub.net).
+If you want to improve this library, please refer to the [contribute page](/pages/CONTRIBUTING.html) which details how to use the library in development.
 
-This document contains details on the development workflow used for the component.
+## 🏷️ As easy as HTML
 
-Refer to the documentation website for more details on how to use the component: **[vemonet.github.io/nanopub-display](https://vemonet.github.io/nanopub-display)**
+`<nanopub-display>` and `<nanopub-status>` are just HTML elements, you can use them anywhere you can use HTML:
 
-## 📥️ Install
+```html
+<html lang="en">
+  <head>
+    <script type="module" src="https://unpkg.com/@nanopub/display?module"></script>
+  </head>
 
-Clone the repository:
-
-```bash
-git clone https://github.com/vemonet/nanopub-display
-cd nanopub-display
+  <body>
+    <div style="min-height: 100vh; width: 100%;">
+      <div>
+        <nanopub-status url="https://purl.org/np/RAHtkscyyyJDLvWRuINckQrn5rbHzQKvwakNVC3fmRzGU" />
+      </div>
+      <nanopub-display url="https://purl.org/np/RAHtkscyyyJDLvWRuINckQrn5rbHzQKvwakNVC3fmRzGU" />
+    </div>
+  </body>
+</html>
 ```
 
-Install dependencies:
+> `<nanopub-display>` enables developers and users to control which graphs from the nanopublication are displayed.
 
-```bash
-yarn
+<script type="module" src="https://cdn.jsdelivr.net/npm/@nanopub/display/dist/nanopub-display.bundle.js"></script>
+
+<div>
+  <nanopub-status url="https://purl.org/np/RAHtkscyyyJDLvWRuINckQrn5rbHzQKvwakNVC3fmRzGU" />
+</div>
+<nanopub-display url="https://purl.org/np/RAHtkscyyyJDLvWRuINckQrn5rbHzQKvwakNVC3fmRzGU"></nanopub-display>
+
+## 💫 Declarative rendering
+
+`@nanopub/display` can be used with popular declarative rendering libraries like **React**, **Angular**, **Vue**, Svelte, and lit-html
+
+```js
+import {html, render} from 'lit-html';
+import '@nanopub/display';
+
+const np = 'https://purl.org/np/RAHtkscyyyJDLvWRuINckQrn5rbHzQKvwakNVC3fmRzGU';
+
+render(
+  html`
+    <h4>This is a &lt;nanopub-display&gt;</h4>
+    <nanopub-display url=${np} />
+  `,
+  document.body
+);
 ```
 
-> If you use VS Code, we highly recommend the [lit-plugin extension](https://marketplace.visualstudio.com/items?itemName=runem.lit-plugin), which enables some extremely useful features for lit-html templates.
+## 🧶 Cytoscape configuration
 
-## 🧑‍💻 Development
+`@nanopub/display` can also be used to generate a cytoscape configuration to nicely display your nanopublication with [CytoscapeJS](https://js.cytoscape.org).
 
-Start the component in development mode, it will automatically reload when the code is changed:
-
-```bash
-yarn dev
-```
-
-## 📦️ Build
-
-To build the JavaScript version of your component:
+⚠️ Cytoscape is not imported by `@nanopub/display`, you will need to make sure to install the following packages first:
 
 ```bash
-yarn build
+npm i --save cytoscape cytoscape-cose-bilkent cytoscape-popper
+# or
+yarn add cytoscape cytoscape-cose-bilkent cytoscape-popper
 ```
 
-> This sample uses the TypeScript compiler and [rollup](https://rollupjs.org) to produce JavaScript that runs in modern browsers.
+The code below shows how to easily generate the cytoscape configuration, please refer to the [cytoscape documentation](https://js.cytoscape.org/#getting-started) to see how to setup your cytoscape container.
 
-## ☑️ Testing
+```ts
+import {cytoscapeGetConfig, cytoscapeShowNodeOnClick, cytoscapeHighlightConnectedEdges} from '@nanopub/display';
+import cytoscape, { Core } from 'cytoscape';
+import popper from 'cytoscape-popper';
+import COSEBilkent from 'cytoscape-cose-bilkent';
 
-Tests can be run with the `test` script:
+// Get the cytoscape div container, and nanopub RDF
+const cyContainer?: HTMLDivElement;
+const nanopubTrigRdfString?: string;
+
+// Generate the cytoscape config for a given nanopub RDF
+const cytoscapeConfig = getCytoscapeConfig(nanopubTrigRdfString),
+
+// Provide the generated config and cytoscape container to the cytoscape builder
+const cy = cytoscape({
+    ...cytoscapeConfig,
+    container: cyContainer
+})
+
+// Hightlight connected and show a card with the content of the node on click
+cy.on('tap', "node", (e: any) => cytoscapeHighlightConnectedEdges(e, cy))
+cy.on('tap', 'node', cytoscapeShowNodeOnClick);
+```
+
+
+# 📥️ Install
+
+`<nanopub-display>` is distributed on npm, so you can install it in your project, or use it via npm CDNs like [unpkg.com](https://unpkg.com).
+
+## 📦️ Install with a package manager
+
+The most convenient way to install a package in your project, using either `npm` or `yarn`:
 
 ```bash
-yarn test
+npm i --save @nanopub/display
+# or
+yarn add @nanopub/display
 ```
 
-Alternatively the `test:prod` command will run your tests in Lit's production mode.
+### ⚛️ Define types for React apps
 
-> This project uses modern-web.dev's [@web/test-runner](https://www.npmjs.com/package/@web/test-runner) for testing. See the [modern-web.dev testing documentation](https://modern-web.dev/docs/test-runner/overview) for more information.
+To fix JSX types, for example when used in a React app, you will need to add this declaration to one of your project `.d.ts` file:
 
-## ✒️ Formatting
-
-[Prettier](https://prettier.io/) is used for code formatting:
-
-```bash
-yarn fmt
+```ts
+declare namespace JSX {
+  interface NanopubDisplay {
+    url?: string;
+    rdf?: string;
+  }
+  interface NanopubStatus {
+    url?: string;
+  }
+  interface IntrinsicElements {
+    'nanopub-display': NanopubDisplay;
+    'nanopub-status': NanopubStatus;
+  }
+}
 ```
 
-> You can change the configuration in the `package.json`. Prettier has not been configured to run when committing files, but this can be added with Husky and `pretty-quick`. See the [prettier.io](https://prettier.io/) site for instructions.
+## 🌐 Import from a CDN
 
-## ✅ Linting
+npm CDNs like [unpkg.com](https://unpkg.com) or [jsdelivr.com](https://www.jsdelivr.com) can directly serve files that have been published to npm. This works great for standard JavaScript modules that the browser can load natively, or minified bundles.
 
-To check if the project does not break any linting rule run:
+For this element to work from unpkg.com specifically, you need to include the `?module` query parameter, which tells unpkg.com to rewrite "bare" module specifiers to full URLs.
 
-```bash
-yarn lint
+### 🛩️ Import Module
+
+In HTML:
+
+```html
+<script type="module" src="https://unpkg.com/@nanopub/display?module"></script>
 ```
 
-> Linting of TypeScript files is provided by [ESLint](eslint.org) and [TypeScript ESLint](https://github.com/typescript-eslint/typescript-eslint). In addition, [lit-analyzer](https://www.npmjs.com/package/lit-analyzer) is used to type-check and lint lit-html templates with the same engine and rules as lit-plugin.
+In JavaScript:
 
-## 📖 Documentation website
-
-To build and run the documentation website, run:
-
-```bash
-yarn docs
+```js
+import {NanopubDisplay} from 'https://unpkg.com/@nanopub/display?module';
 ```
 
-To build the website for deployment, run:
+### 🚛 Import Bundle
 
-```bash
-yarn docs:build
+We also distribute Nanopub Display as a minified bundle with all dependencies pre-included (~60kB).
+
+Import the latest version:
+
+```html
+<script type="module" src="https://cdn.jsdelivr.net/npm/@nanopub/display/dist/nanopub-display.min.js"></script>
 ```
 
-## ℹ️ More information
+In production we recommend to use a specific version:
 
-🔨 Built with [Lit](https://lit.dev/) and [N3.js](https://github.com/rdfjs/N3.js)
-
-Vite TS starter: https://github.com/vitejs/vite/tree/main/packages/create-vite/template-lit-ts
-
-Official lit TS starter: https://github.com/lit/lit-element-starter-ts
-
-https://github.com/zazuko/rdfjs-elements
+```html
+<script type="module" src="https://cdn.jsdelivr.net/npm/@nanopub/display@0.0.1/dist/nanopub-display.min.js"></script>
+```

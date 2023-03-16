@@ -6,6 +6,7 @@ import {styleMap} from 'lit/directives/style-map.js';
 
 import {Parser, Quad} from 'n3';
 import {NanopubWriter} from './n3-writer';
+import './nanopub-status-icon';
 
 const npColor = {
   head: css`#e8e8e8`,
@@ -79,9 +80,9 @@ export class NanopubDisplay extends LitElement {
       position: relative;
       display: inline-block;
       text-decoration: none;
-      padding: 3px 8px;
+      padding: 2px 6px;
       border-radius: 7px;
-      cursor: help;
+      cursor: pointer;
     }
     .display-checklist .anchor-display-checklist:hover {
       background: ${npColor.grey};
@@ -123,6 +124,12 @@ export class NanopubDisplay extends LitElement {
    */
   @property({type: String})
   rdf = '';
+
+  /**
+   * Display the status icon (if up-to-date, retracted, or newers)
+   */
+  @property({type: Boolean})
+  disableDisplayStatus = false;
 
   /**
    * Display the prefixes section, or not
@@ -389,6 +396,9 @@ export class NanopubDisplay extends LitElement {
                     : html``}
                 </div>`
               : html``}
+            ${!this.disableDisplayStatus
+              ? html`<nanopub-status-icon url=${this.url} style="margin-right: 14px; margin-top: 1px;" />`
+              : html``}
             <br />
 
             <div id="nanopub-prefixes">
@@ -435,6 +445,7 @@ declare global {
 //   }
 // }
 
+// TODO: export those interfaces so they can be imported in .d.ts files easily?
 export declare namespace JSX {
   interface NanopubDisplay {
     /**

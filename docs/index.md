@@ -11,8 +11,7 @@ It enables developers and users to control which graphs from the nanopublication
 
 ## 🏷️ As easy as HTML
 
-
-`<nanopub-display>` is just an HTML element, you can use it anywhere you can use HTML:
+`<nanopub-display>` and `<nanopub-status>` are just HTML elements, you can use them anywhere you can use HTML:
 
 ```html
 <html lang="en">
@@ -22,13 +21,18 @@ It enables developers and users to control which graphs from the nanopublication
 
   <body>
     <div style="min-height: 100vh; width: 100%;">
+      <div>
+        <nanopub-status url="https://purl.org/np/RAHtkscyyyJDLvWRuINckQrn5rbHzQKvwakNVC3fmRzGU" />
+      </div>
       <nanopub-display url="https://purl.org/np/RAHtkscyyyJDLvWRuINckQrn5rbHzQKvwakNVC3fmRzGU" />
     </div>
   </body>
 </html>
 ```
 
-
+<div>
+  <nanopub-status url="https://purl.org/np/RAHtkscyyyJDLvWRuINckQrn5rbHzQKvwakNVC3fmRzGU" />
+</div>
 <nanopub-display url="https://purl.org/np/RAHtkscyyyJDLvWRuINckQrn5rbHzQKvwakNVC3fmRzGU"></nanopub-display>
 
 ## 💫 Declarative rendering
@@ -47,6 +51,24 @@ render(
   `,
   document.body
 );
+```
+
+To fix JSX types, for example when used in a React app, you will need to add this declaration to one of your project `.d.ts` file:
+
+```ts
+declare namespace JSX {
+  interface NanopubDisplay {
+    url?: string;
+    rdf?: string;
+  }
+  interface NanopubStatus {
+    url?: string;
+  }
+  interface IntrinsicElements {
+    'nanopub-display': NanopubDisplay;
+    'nanopub-status': NanopubStatus;
+  }
+}
 ```
 
 ## 🕸️ Cytoscape configuration
@@ -86,4 +108,3 @@ const cy = cytoscape({
 cy.on('tap', "node", (e: any) => cytoscapeHighlightConnectedEdges(e, cy))
 cy.on('tap', 'node', cytoscapeShowNodeOnClick);
 ```
-
