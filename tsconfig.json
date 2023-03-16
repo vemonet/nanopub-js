@@ -43,7 +43,7 @@
       "external": true
     },
     "navigationLinks": {
-      "✒️ Contribute": "/pages/CONTRIBUTING.html",
+      "✒️ Contribute": "/nanopub-display/pages/CONTRIBUTING.html",
       "🛸 GitHub": "https://github.com/vemonet/nanopub-display"
     },
     "customCss": "docs/style.css",

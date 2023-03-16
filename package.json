@@ -29,7 +29,7 @@
     "build:watch": "tsc --watch",
     "cem": "cem analyze --litelement --globs \"src/**/*.ts\" --outdir dist",
     "docs:build": "rimraf docs-dist && yarn build && typedoc && bash ./docs/fix_docs.sh",
-    "docs": "yarn docs:build && vite ./docs-dist",
+    "docs": "yarn docs:build && vite ./docs-dist --base /nanopub-display/",
     "docs:fix": "find . -type f -exec sed -i 's///g' {} +",
     "eleventy:docs": "yarn eleventy:prebuild && eleventy --serve",
     "eleventy:build": "yarn eleventy:prebuild && eleventy",
@@ -40,7 +40,7 @@
     "test:all": "yarn test:dev && yarn test:prod",
     "fmt": "prettier \"**/*.{cjs,html,js,json,md,ts}\" --ignore-path .gitignore --write",
     "lint": "eslint 'src/**/*.ts' --ignore-path .gitignore --fix && lit-analyzer",
-    "publish": "yarn npm publish"
+    "publish": "yarn build && yarn npm publish"
   },
   "keywords": [
     "nanopublications",
