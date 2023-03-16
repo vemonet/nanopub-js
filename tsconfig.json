@@ -43,7 +43,8 @@
       "external": true
     },
     "navigationLinks": {
-      "✒️  Contribute": "/pages/CONTRIBUTING.html"
+      "✒️ Contribute": "/pages/CONTRIBUTING.html",
+      "🐙 GitHub": "https://github.com/vemonet/nanopub-display"
     },
     "customCss": "docs/style.css",
     // https://knodescommunity.github.io/typedoc-plugins/_knodes_typedoc_plugin_pages/pages/pages-tree.html
