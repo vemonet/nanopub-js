@@ -1,5 +1,3 @@
-/* eslint-disable functional/immutable-data */
-
 // import json2html from 'node-json2html';
 
 export const grlcNpApiUrls = [
@@ -26,7 +24,6 @@ const getUpdateStatusX = (elementId: string, npUri: string, apiUrls) => {
   r.setRequestHeader('Accept', 'application/json');
   r.responseType = 'json';
   r.onload = function () {
-    // eslint-disable-next-line functional/no-let
     let h = '';
     if (r.status == 200) {
       const bindings = r.response['results']['bindings'];
@@ -39,7 +36,6 @@ const getUpdateStatusX = (elementId: string, npUri: string, apiUrls) => {
         if (bindings.length > 1) {
           h = 'This nanopublication has <strong>newer versions</strong>: ';
         }
-        // eslint-disable-next-line functional/no-loop-statement
         for (const b of bindings) {
           const l = b['latest']['value'];
           h += ' <code><a href="' + l + '">' + l + '</a></code>';
