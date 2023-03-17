@@ -23,6 +23,7 @@
     "forceConsistentCasingInFileNames": true,
     "noImplicitOverride": true,
     "removeComments": true,
+    "skipLibCheck": true,
     "plugins": [
       {
         "name": "ts-lit-plugin",
@@ -32,30 +33,4 @@
   },
   "include": ["src/**/*.ts"],
   "exclude": [],
-  "typedocOptions": {
-    "entryPoints": ["src/index.ts"],
-    "out": "docs-dist",
-    "exclude": ["**/*.spec.ts"],
-    "visibilityFilters": {
-      "protected": true,
-      "private": true,
-      "inherited": false,
-      "external": true
-    },
-    "navigationLinks": {
-      "✒️ Contribute": "/nanopub-display/pages/CONTRIBUTING.html",
-      "🛸 GitHub": "https://github.com/vemonet/nanopub-display"
-    },
-    "customCss": "docs/style.css",
-    // https://knodescommunity.github.io/typedoc-plugins/_knodes_typedoc_plugin_pages/pages/pages-tree.html
-    "pluginPages": {
-      "source": ".",
-      "pages": [
-        {
-          "title": "Contributing",
-          "source": "CONTRIBUTING.md"
-        }
-      ]
-    }
-  }
 }

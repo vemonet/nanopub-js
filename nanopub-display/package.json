@@ -1,0 +1,81 @@
+{
+  "name": "@nanopub/display",
+  "version": "0.0.4",
+  "description": "A web component to display Nanopublications",
+  "author": {
+    "name": "Vincent Emonet",
+    "email": "vincent.emonet@gmail.com",
+    "url": "https://vemonet.github.io"
+  },
+  "license": "MIT",
+  "type": "module",
+  "main": "src/index.ts",
+  "module": "dist/nanopub-display.js",
+  "unpkg": "dist/nanopub-display.min.js",
+  "types": "dist/index.d.ts",
+  "customElements": "dist/custom-elements.json",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/nanopub-display.js"
+    },
+    "./custom-elements.json": "./dist/custom-elements.json",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "rimraf dist && tsc && rollup -c && yarn cem",
+    "build:vite": "vite build",
+    "build:watch": "tsc --watch",
+    "cem": "cem analyze --litelement --globs \"src/**/*.ts\" --outdir dist",
+    "docs:build": "rimraf docs-dist && yarn build && typedoc && bash ./docs/fix_docs.sh",
+    "docs": "yarn docs:build && vite ./docs-dist --base /nanopub-display/",
+    "docs:fix": "find . -type f -exec sed -i 's///g' {} +",
+    "test": "yarn test:build && wtr",
+    "test:build": "tsc && BUNDLE=true rollup -c",
+    "test:prod": "yarn test && MODE=prod wtr",
+    "test:all": "yarn test:dev && yarn test:prod",
+    "lint": "eslint 'src/**/*.ts' --ignore-path ../.gitignore --fix && lit-analyzer",
+    "publish": "yarn build && yarn npm publish"
+  },
+  "keywords": [
+    "nanopublications",
+    "web-components",
+    "lit-element",
+    "typescript",
+    "lit"
+  ],
+  "dependencies": {
+    "lit": "^2.2.4",
+    "n3": "^1.16.3"
+  },
+  "devDependencies": {
+    "@custom-elements-manifest/analyzer": "^0.6.3",
+    "@open-wc/testing": "^3.1.5",
+    "@rollup/plugin-commonjs": "^24.0.1",
+    "@rollup/plugin-node-resolve": "^15.0.1",
+    "@rollup/plugin-replace": "^5.0.2",
+    "@rollup/plugin-typescript": "^11.0.0",
+    "@types/n3": "^1.10.4",
+    "@types/node": "^18.15.3",
+    "@typescript-eslint/eslint-plugin": "^5.25.0",
+    "@typescript-eslint/parser": "^5.25.0",
+    "@web/dev-server": "^0.1.31",
+    "@web/dev-server-esbuild": "^0.3.3",
+    "@web/dev-server-legacy": "^1.0.0",
+    "@web/test-runner": "^0.15.0",
+    "@web/test-runner-playwright": "^0.9.0",
+    "@webcomponents/webcomponentsjs": "^2.6.0",
+    "eslint": "^8.15.0",
+    "eslint-plugin-lit": "^1.8.2",
+    "lit-analyzer": "^1.2.1",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.73.0",
+    "rollup-plugin-minify-html-literals": "^1.2.6",
+    "rollup-plugin-summary": "^1.4.3",
+    "rollup-plugin-terser": "^7.0.2",
+    "typescript": "^4.9.5",
+    "vite": "^4.1.4",
+    "vite-plugin-dts": "^2.1.0"
+  }
+}

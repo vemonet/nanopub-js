@@ -59,7 +59,6 @@ build/
 .history/
 
 # Stores VSCode versions used for testing VSCode extensions
-.vscode
 .vscode-test
 
 # Ignore Intellij IDEA
