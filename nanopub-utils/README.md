@@ -1,3 +1,1 @@
-# @nanopub/utils
-
-A JavaScript library for retrieving and  querying nanopublications.
+A JavaScript library providing utility functions to work with [Nanopublications](https://nanopub.net/).

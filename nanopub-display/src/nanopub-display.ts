@@ -446,7 +446,7 @@ declare global {
 // }
 
 // TODO: export those interfaces so they can be imported in .d.ts files easily?
-export declare namespace JSX {
+declare namespace JSX {
   interface NanopubDisplay {
     /**
      * The URL
