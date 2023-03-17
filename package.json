@@ -7,7 +7,7 @@
     "dev": "nx run-many --target=dev",
     "build": "nx run-many --target=build",
     "test": "nx run-many --target=test",
-    "fmt": "prettier \"**/*.{cjs,html,js,json,md,ts}\" --ignore-path .gitignore --write",
+    "fmt": "prettier \"**/*.{ts,tsx,js,cjs,json,md,html}\" --ignore-path .gitignore --write",
     "lint": "nx run-many --target=lint",
     "docs": "yarn docs:build && vite ./docs-dist --base /nanopub-display/",
     "docs:build": "rimraf docs-dist && yarn build && typedoc && bash ./docs/fix_docs.sh"
@@ -18,6 +18,7 @@
     "@typescript-eslint/eslint-plugin": "^5.25.0",
     "@typescript-eslint/parser": "^5.25.0",
     "eslint": "^8.15.0",
+    "eslint-config-prettier": "^8.7.0",
     "nx": "15.8.6",
     "prettier": "^2.6.2",
     "rimraf": "^3.0.2",
@@ -29,6 +30,10 @@
     "nanopub-display",
     "nanopub-utils"
   ],
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "packageManager": "yarn@3.4.1",
   "prettier": {
     "trailingComma": "none",
     "tabWidth": 2,
@@ -39,75 +44,6 @@
     "printWidth": 120,
     "pluginSearchDirs": [
       "."
-    ]
-  },
-  "eslintConfig": {
-    "env": {
-      "browser": true,
-      "es2021": true
-    },
-    "extends": [
-      "plugin:@typescript-eslint/recommended",
-      "plugin:lit/recommended"
-    ],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-      "ecmaVersion": "latest",
-      "sourceType": "module"
-    },
-    "plugins": [
-      "lit",
-      "@typescript-eslint"
-    ],
-    "rules": {
-      "no-prototype-builtins": "off",
-      "no-useless-escape": "off",
-      "no-control-regex": "off",
-      "lit/no-invalid-html": "off",
-      "@typescript-eslint/ban-types": "off",
-      "@typescript-eslint/explicit-function-return-type": "off",
-      "@typescript-eslint/explicit-module-boundary-types": "off",
-      "@typescript-eslint/no-explicit-any": "off",
-      "@typescript-eslint/no-empty-function": "off",
-      "@typescript-eslint/no-non-null-assertion": "off",
-      "@typescript-eslint/no-namespace": "off",
-      "@typescript-eslint/no-unused-vars": [
-        "warn",
-        {
-          "argsIgnorePattern": "^_"
-        }
-      ]
-    },
-    "overrides": [
-      {
-        "files": [
-          "rollup.config.js",
-          "web-test-runner.config.js"
-        ],
-        "env": {
-          "node": true
-        }
-      },
-      {
-        "files": [
-          "*_test.ts",
-          "**/custom_typings/*.ts",
-          "packages/labs/ssr/src/test/integration/tests/**",
-          "packages/labs/ssr/src/lib/util/parse5-utils.ts"
-        ],
-        "rules": {
-          "@typescript-eslint/no-explicit-any": "off"
-        }
-      }
-    ],
-    "ignorePatterns": [
-      "*.lock",
-      "node_modules/*",
-      "docs/*",
-      "docs-src/*",
-      "rollup-config.js",
-      "custom-elements.json",
-      "web-dev-server.config.js"
     ]
   }
 }
