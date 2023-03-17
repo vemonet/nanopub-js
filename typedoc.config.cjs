@@ -2,10 +2,10 @@
 module.exports = {
   // entryPoints: ["./src/index.ts", "./src/secondary-entry.ts"],
   // out: "doc",
-  entryPointStrategy: "packages",
-  entryPoints: ["nanopub-display", "nanopub-utils"],
-  out: "docs-dist",
-  exclude: ["**/*.spec.ts"],
+  entryPointStrategy: 'packages',
+  entryPoints: ['nanopub-display', 'nanopub-utils'],
+  out: 'docs-dist',
+  exclude: ['**/*.spec.ts'],
   visibilityFilters: {
     protected: true,
     private: true,
@@ -13,18 +13,18 @@ module.exports = {
     external: true
   },
   navigationLinks: {
-    "✒️ Contribute": "/nanopub-display/pages/CONTRIBUTING.html",
-    "🛸 GitHub": "https://github.com/vemonet/nanopub-display"
+    '✒️ Contribute': '/nanopub-display/pages/CONTRIBUTING.html',
+    '🛸 GitHub': 'https://github.com/vemonet/nanopub-display'
   },
-  customCss: "docs/style.css",
+  customCss: 'docs/style.css',
   // https://knodescommunity.github.io/typedoc-plugins/_knodes_typedoc_plugin_pages/pages/pages-tree.html
   pluginPages: {
-    source: ".",
+    source: '.',
     pages: [
       {
-        title: "Contributing",
-        source: "CONTRIBUTING.md"
+        title: 'Contributing',
+        source: 'CONTRIBUTING.md'
       }
     ]
   }
-}
+};

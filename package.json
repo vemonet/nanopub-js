@@ -7,7 +7,7 @@
     "dev": "nx run-many --target=dev",
     "build": "nx run-many --target=build",
     "test": "nx run-many --target=test",
-    "fmt": "prettier \"**/*.{cjs,html,js,json,md,ts}\" --ignore-path ../.gitignore --write",
+    "fmt": "prettier \"**/*.{cjs,html,js,json,md,ts}\" --ignore-path .gitignore --write",
     "lint": "nx run-many --target=lint",
     "docs": "yarn docs:build && vite ./docs-dist --base /nanopub-display/",
     "docs:build": "rimraf docs-dist && yarn build && typedoc && bash ./docs/fix_docs.sh"
