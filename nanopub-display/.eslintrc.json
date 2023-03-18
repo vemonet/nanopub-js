@@ -1,24 +1,8 @@
 {
-  // "extends": [
-  //   "plugin:lit/recommended"
-  //   // "plugin:@typescript-eslint/recommended"
-  // ],
-  "plugins": [
-    "lit",
-    "@typescript-eslint"
-  ],
+  "root": true,
+  "extends": ["custom", "plugin:lit/recommended"],
+  "plugins": ["lit"],
   "rules": {
     "lit/no-invalid-html": "off"
-  },
-  "overrides": [
-    {
-      "files": [
-        "rollup.config.js",
-        "web-test-runner.config.js"
-      ],
-      "env": {
-        "node": true
-      }
-    }
-  ]
+  }
 }

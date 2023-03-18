@@ -10,6 +10,9 @@ import typescript from '@rollup/plugin-typescript';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  server: {
+    port: 3000
+  },
   build: {
     outDir: 'dist',
     target: ['esnext'],

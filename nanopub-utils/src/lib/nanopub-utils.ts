@@ -5,17 +5,17 @@ export const grlcNpApiUrls = [
   'https://grlc.services.np.trustyuri.net/api/local/local/'
 ];
 
-export const getUpdateStatus = (elementId: string, npUri: string) => {
-  document.getElementById(elementId).innerHTML = '<em>Checking for updates...</em>';
+export const getUpdateStatus = (npUri: string) => {
+  // document.getElementById(elementId)!.innerHTML = '<em>Checking for updates...</em>';
   const shuffledApiUrls = [...grlcNpApiUrls].sort(() => 0.5 - Math.random());
-  getUpdateStatusX(elementId, npUri, shuffledApiUrls);
+  return getUpdateStatusX(npUri, shuffledApiUrls);
 };
 
-const getUpdateStatusX = (elementId: string, npUri: string, apiUrls) => {
+const getUpdateStatusX = (npUri: string, apiUrls) => {
   if (apiUrls.length == 0) {
-    const h: HTMLElement = document.getElementById(elementId) as HTMLInputElement;
-    h.innerHTML = '<em>An error has occurred while checking for updates.</en>';
-    return;
+    // const h: HTMLElement = document.getElementById(elementId) as HTMLInputElement;
+    // h.innerHTML = '<em>An error has occurred while checking for updates.</en>';
+    return {error: 'error'};
   }
   const apiUrl = apiUrls.shift();
   const requestUrl = apiUrl + '/get_latest_version?np=' + npUri;
@@ -24,35 +24,35 @@ const getUpdateStatusX = (elementId: string, npUri: string, apiUrls) => {
   r.setRequestHeader('Accept', 'application/json');
   r.responseType = 'json';
   r.onload = function () {
-    let h = '';
     if (r.status == 200) {
       const bindings = r.response['results']['bindings'];
-      if (bindings.length == 1 && bindings[0]['latest']['value'] === npUri) {
-        h = 'This is the latest version.';
-      } else if (bindings.length == 0) {
-        h = 'This nanopublication has been <strong>retracted</strong>.';
-      } else {
-        h = 'This nanopublication has a <strong>newer version</strong>: ';
-        if (bindings.length > 1) {
-          h = 'This nanopublication has <strong>newer versions</strong>: ';
-        }
-        for (const b of bindings) {
-          const l = b['latest']['value'];
-          h += ' <code><a href="' + l + '">' + l + '</a></code>';
-        }
-      }
-      document.getElementById(elementId).innerHTML = h;
+      return bindings;
+      // if (bindings.length == 1 && bindings[0]['latest']['value'] === npUri) {
+      //   h = 'This is the latest version.';
+      // } else if (bindings.length == 0) {
+      //   h = 'This nanopublication has been <strong>retracted</strong>.';
+      // } else {
+      //   h = 'This nanopublication has a <strong>newer version</strong>: ';
+      //   if (bindings.length > 1) {
+      //     h = 'This nanopublication has <strong>newer versions</strong>: ';
+      //   }
+      //   for (const b of bindings) {
+      //     const l = b['latest']['value'];
+      //     h += ' <code><a href="' + l + '">' + l + '</a></code>';
+      //   }
+      // }
+      // document.getElementById(elementId)!.innerHTML = h;
     } else {
-      getUpdateStatusX(elementId, npUri, apiUrls);
+      return getUpdateStatusX(npUri, apiUrls);
     }
   };
   r.onerror = function () {
-    getUpdateStatusX(elementId, npUri, apiUrls);
+    return getUpdateStatusX(npUri, apiUrls);
   };
-  r.send();
+  return r.send();
 };
 
-export const getJson = (url: string, callback) => {
+export const getJson = (url: string, callback: any) => {
   const request = new XMLHttpRequest();
   request.open('GET', url, true);
   request.responseType = 'json';
