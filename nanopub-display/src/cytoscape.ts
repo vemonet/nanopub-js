@@ -1,4 +1,4 @@
-import {Parser} from 'n3';
+import {Parser} from 'n3'
 
 export const cyGetConfig = (rdf: string) => {
   return {
@@ -10,19 +10,19 @@ export const cyGetConfig = (rdf: string) => {
     autoungrabify: false,
     wheelSensitivity: 0.1,
     showOverlay: true
-  };
-};
+  }
+}
 
 // cyGetElemsForNanopub
 export const cyGetElemsForNanopub = async (rdf: string) => {
-  const parser = new Parser({format: 'application/trig'});
-  const cyElems: any = [];
-  const graphs: any = {};
+  const parser = new Parser({format: 'application/trig'})
+  const cyElems: any = []
+  const graphs: any = {}
 
   parser.parse(rdf, (error: any, quad: any, prefixes: any): any => {
     if (error) {
-      console.log('Error parsing the RDF with n3 to display in cytoscape', error);
-      return null;
+      console.log('Error parsing the RDF with n3 to display in cytoscape', error)
+      return null
     }
     if (quad && quad.subject.value && quad.object.value) {
       // console.log("quad", quad.object.termType)
@@ -41,12 +41,12 @@ export const cyGetElemsForNanopub = async (rdf: string) => {
           textColor: '#212121'
           // https://stackoverflow.com/questions/58557196/group-nodes-together-in-cytoscape-js
         }
-      });
+      })
       // For literal that are too long without spaces, like public keys
       const cutLongObject =
         !quad.object.value.includes(' ') && quad.object.value.length > 100
           ? quad.object.value.replace(/(.{60})/g, '$1\n')
-          : quad.object.value;
+          : quad.object.value
       cyElems.push({
         data: {
           id: quad.object.value,
@@ -60,7 +60,7 @@ export const cyGetElemsForNanopub = async (rdf: string) => {
           fontSize: '30px',
           fontWeight: '300'
         }
-      });
+      })
       // Add Predicate edge to cytoscape graph
       cyElems.push({
         data: {
@@ -68,28 +68,28 @@ export const cyGetElemsForNanopub = async (rdf: string) => {
           target: quad.object.value,
           label: quad.predicate.value
         }
-      });
+      })
       // Add the graph to the list of graphs
-      graphs[quad.graph.value] = quad.graph.value;
+      graphs[quad.graph.value] = quad.graph.value
     } else {
       // Define graphs color
       Object.keys(graphs).map((g: string) => {
-        let graphColor = '#eceff1';
-        let graphTextColor = '#000000';
+        let graphColor = '#eceff1'
+        let graphTextColor = '#000000'
         if (g.endsWith('assertion')) {
           // blue
-          graphColor = '#e3f2fd';
-          graphTextColor = '#0d47a1';
+          graphColor = '#e3f2fd'
+          graphTextColor = '#0d47a1'
           // graphColor = npColor.assertion
           // graphTextColor = npColor.assertion
         } else if (g.endsWith('provenance')) {
           // Red
-          graphColor = '#ffebee';
-          graphTextColor = '#b71c1c';
+          graphColor = '#ffebee'
+          graphTextColor = '#b71c1c'
         } else if (g.toLowerCase().endsWith('pubinfo')) {
           // Yellow
-          graphColor = '#fffde7';
-          graphTextColor = '#f57f17';
+          graphColor = '#fffde7'
+          graphTextColor = '#f57f17'
         }
         // Add Graph node at start of cytoscape graph
         cyElems.unshift({
@@ -104,42 +104,42 @@ export const cyGetElemsForNanopub = async (rdf: string) => {
             fontSize: '50px',
             fontWeight: '700'
           }
-        });
-      });
+        })
+      })
 
-      const allPrefixes = {...prefixes, rdf: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#'};
+      const allPrefixes = {...prefixes, rdf: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#'}
       // Resolve prefixes
       cyElems.map((elem: any) => {
         if (elem.data.label) {
-          elem.data.label = replacePrefix(elem.data.label, allPrefixes);
+          elem.data.label = replacePrefix(elem.data.label, allPrefixes)
         }
-      });
+      })
     }
-  });
+  })
   // console.log('cyElems:', cyElems)
-  return cyElems;
-};
+  return cyElems
+}
 
 export const replacePrefix = (uri: string, prefixes: any) => {
   // const namespace = (uri.lastIndexOf('#') > 0) ? uri.lastIndexOf('#') : uri.lastIndexOf('/')
   for (let i = 0; i < Object.keys(prefixes).length; i++) {
-    const prefix = Object.keys(prefixes)[i];
+    const prefix = Object.keys(prefixes)[i]
     if (uri.startsWith(prefixes[prefix])) {
-      return uri.replace(prefixes[prefix], prefix + ':');
+      return uri.replace(prefixes[prefix], prefix + ':')
     }
   }
-  return uri;
-};
+  return uri
+}
 
 export const displayLink = (urlString: string) => {
   if (/^(?:node[0-9]+)|((https?|ftp):.*)$/.test(urlString)) {
     return `<a href="${urlString}" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">
             ${urlString}
-        </a>`;
+        </a>`
   } else {
-    return urlString;
+    return urlString
   }
-};
+}
 
 export const cyHighlightConnectedEdges = (e: any, cy: any) => {
   cy?.edges().style({
@@ -148,52 +148,52 @@ export const cyHighlightConnectedEdges = (e: any, cy: any) => {
     width: 2,
     'target-arrow-color': '#263238',
     'font-size': '30px'
-  }); // Grey
-  const ele = e.target;
+  }) // Grey
+  const ele = e.target
   ele.connectedEdges().style({
     'line-color': '#c62828',
     color: '#c62828', // red
     width: 4,
     'target-arrow-color': '#c62828',
     'font-size': '40px'
-  });
-};
+  })
+}
 
 export const cyShowNodeOnClick = (e: any) => {
-  const ele = e.target;
+  const ele = e.target
   ele.popper({
     content: () => {
       if (window) {
         // Handle when click out of the popper
-        setTimeout(() => window.addEventListener('click', handleClickOut), 0);
+        setTimeout(() => window.addEventListener('click', handleClickOut), 0)
       }
-      const div = document.createElement('div');
+      const div = document.createElement('div')
       // Replace the start "graph-http" for graphs nodes URIs
-      const elementLabel = ele.id().startsWith('graph-http') ? ele.id().replace('graph-http', 'http') : ele.id();
+      const elementLabel = ele.id().startsWith('graph-http') ? ele.id().replace('graph-http', 'http') : ele.id()
 
       // TODO: improve eceff1 eff1f1
       div.innerHTML = `<div id="cytoscapePop" class="cytoscapePopper"
           style="background: #eff1f1; padding: 8px; border-radius: 8px; border: 1px solid #ccc;"
         >
           <span>${displayLink(elementLabel)}</span>
-        </div>`;
-      document.body.appendChild(div);
-      return div;
+        </div>`
+      document.body.appendChild(div)
+      return div
     }
-  });
-};
+  })
+}
 
 // /**
 //  * Close the popper showing the node content if click outside of it
 //  */
 const handleClickOut = (e: any) => {
-  const popEle = document.getElementById('cytoscapePop');
+  const popEle = document.getElementById('cytoscapePop')
 
   if (window && popEle && !popEle?.contains(e.originalTarget)) {
-    window.removeEventListener('click', handleClickOut);
-    popEle?.remove();
+    window.removeEventListener('click', handleClickOut)
+    popEle?.remove()
   }
-};
+}
 
 export const cyStyle = [
   {
@@ -257,7 +257,7 @@ export const cyStyle = [
       // "color": 'data(color)',
     }
   }
-];
+]
 
 // Change Cytoscape layout: https://js.cytoscape.org/#layouts
 export const cyLayouts = {
@@ -446,7 +446,7 @@ export const cyLayouts = {
   //     boundingBox: undefined, // Constrain layout bounds; { x1, y1, x2, y2 } or { x1, y1, w, h }
   //     randomize: false // Uses random initial node positions on true
   // },
-};
+}
 
 // export const npColor = {
 //   head: '#e8e8e8',

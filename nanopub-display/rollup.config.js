@@ -1,8 +1,8 @@
-import summary from 'rollup-plugin-summary';
-import resolve from '@rollup/plugin-node-resolve';
-import replace from '@rollup/plugin-replace';
-import commonjs from '@rollup/plugin-commonjs';
-import {terser} from 'rollup-plugin-terser';
+import summary from 'rollup-plugin-summary'
+import resolve from '@rollup/plugin-node-resolve'
+import replace from '@rollup/plugin-replace'
+import commonjs from '@rollup/plugin-commonjs'
+import {terser} from 'rollup-plugin-terser'
 // import minifyHTML from 'rollup-plugin-minify-html-literals';
 
 const rollupConf = {
@@ -22,10 +22,10 @@ const rollupConf = {
   ],
   onwarn(warning) {
     if (warning.code !== 'THIS_IS_UNDEFINED') {
-      console.error(`(!) ${warning.message}`);
+      console.error(`(!) ${warning.message}`)
     }
   }
-};
+}
 
 // https://lit.dev/docs/tools/production/
 // 3 outputs: a normal with external dependencies, one with all dependencies bundled, and one bundled and minified
@@ -66,4 +66,4 @@ export default [
       }
     ]
   }
-];
+]

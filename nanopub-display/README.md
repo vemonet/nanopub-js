@@ -37,10 +37,10 @@ If you want to improve this library, please refer to the [contribute page](/page
 `@nanopub/display` can be used with popular declarative rendering libraries like **React**, **Angular**, **Vue**, Svelte, and lit-html
 
 ```js
-import {html, render} from 'lit-html';
-import '@nanopub/display';
+import {html, render} from 'lit-html'
+import '@nanopub/display'
 
-const np = 'https://purl.org/np/RAHtkscyyyJDLvWRuINckQrn5rbHzQKvwakNVC3fmRzGU';
+const np = 'https://purl.org/np/RAHtkscyyyJDLvWRuINckQrn5rbHzQKvwakNVC3fmRzGU'
 
 render(
   html`
@@ -48,7 +48,7 @@ render(
     <nanopub-display url=${np} />
   `,
   document.body
-);
+)
 ```
 
 ## 🧶 Cytoscape configuration
@@ -110,15 +110,15 @@ To fix JSX types, for example when used in a React app, you will need to add thi
 ```ts
 declare namespace JSX {
   interface NanopubDisplay {
-    url?: string;
-    rdf?: string;
+    url?: string
+    rdf?: string
   }
   interface NanopubStatus {
-    url?: string;
+    url?: string
   }
   interface IntrinsicElements {
-    'nanopub-display': NanopubDisplay;
-    'nanopub-status': NanopubStatus;
+    'nanopub-display': NanopubDisplay
+    'nanopub-status': NanopubStatus
   }
 }
 ```
@@ -140,7 +140,7 @@ In HTML:
 In JavaScript:
 
 ```js
-import {NanopubDisplay} from 'https://unpkg.com/@nanopub/display?module';
+import {NanopubDisplay} from 'https://unpkg.com/@nanopub/display?module'
 ```
 
 ### 🚛 Import Bundle

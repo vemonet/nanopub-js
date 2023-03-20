@@ -62,4 +62,4 @@ module.exports = {
     'coverage',
     'jest.config.js'
   ]
-};
+}
