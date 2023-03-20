@@ -2,6 +2,9 @@ import {Writer, DataFactory} from 'n3';
 
 // cf. https://github.com/rdfjs/N3.js/blob/520054a9fb45ef48b5b58851449942493c57dace/src/N3Writer.js#L378
 
+// TODO: better handle how the URI for the different graphs are detected
+// Maybe convert the nanopub to a JSON version that is easier to manipulate in JS?
+
 const escape = /["\\\t\n\r\b\f\u0000-\u0019\ud800-\udbff]/,
   escapeAll = /["\\\t\n\r\b\f\u0000-\u0019]|[\ud800-\udbff][\udc00-\udfff]/g,
   escapedCharacters = {

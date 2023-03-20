@@ -224,6 +224,7 @@ export class NanopubDisplay extends LitElement {
         this.error = `⚠️ Issue fetching the nanopublication RDF at ${this.url}. ${error}`;
       }
     }
+    // TODO: extract URL from RDF if not provided, to get status
 
     // Parse the RDF with n3.js
     if (!this.error && this.rdf) {
@@ -396,7 +397,7 @@ export class NanopubDisplay extends LitElement {
                     : html``}
                 </div>`
               : html``}
-            ${!this.disableDisplayStatus
+            ${!this.disableDisplayStatus && this.url
               ? html`<nanopub-status-icon url=${this.url} style="margin-right: 14px; margin-top: 1px;" />`
               : html``}
             <br />

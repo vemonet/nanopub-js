@@ -1,3 +1,10 @@
 {
-  "recommendations": ["dbaeumer.vscode-eslint", "esbenp.prettier-vscode", "eamodio.gitlens"]
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "bierner.lit-html",
+    "esbenp.prettier-vscode",
+    "eamodio.gitlens",
+    "gamunu.vscode-yarn",
+    "nrwl.angular-console"
+  ]
 }
